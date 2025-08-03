@@ -4,14 +4,17 @@
 @import url('responsive.css');
 @import url(images);
 
-html
-{
-    /* max-width: 1024px; */
+html{
+    /* font-size: 16px; */
+    /* font-family: 'Open Sans', sans-serif; */
+    /* color: #333; */
+    /* scroll-behavior: smooth; */
 }
 
+
 body {
-    max-width: 1366px;
-    margin: auto;
+    max-width: 100%;
+    margin: 0, auto;
     position: relative;
     min-height: 100vh;
     font-optical-sizing: auto;
@@ -55,8 +58,12 @@ button:hover {
 /* header  */
 
 header {
-    /* background:#454b52; */
-    background-color: rgba(73, 72, 72, 0.1);
+   min-width: 100%;
+    background:#454b52;
+    /* background-color: rgba(73, 72, 72, 0.1); */
+    position: sticky;
+    top: 0%;
+;
 }
 
 header ul {
@@ -64,7 +71,7 @@ header ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 75%;
+    width: 85%;
     margin: auto;
 
 }
@@ -131,18 +138,20 @@ margin: 0.5em 0;
     margin: auto;
 }
 
-/* mini-navbar */
 
 .mini-navbar ul {
-  margin-bottom: 60px;
-  margin-right: -50px;
+  /* margin-bottom: 40px; */
+  /* margin-right: -50px; */
+  /* margin-left: 6em; */
+  margin-right: 1em;
+  /* margin: 1em; */
 }
 
 .mini-navbar ul li {
-    /* background-color: #ff9f00; */
-    width: 15vw;
+    background-color: #acaba9;
+    width: 11vw;
     text-align: center;
-    padding: 5px;
+    padding: 3px;
     border-radius: 20px;
     /* text-shadow: 1px 1px rgb(95, 94, 94); */
     text-shadow: 1px 1px black;
@@ -221,27 +230,21 @@ main {
     text-shadow: 1px 1px rgb(0, 0, 0);
 }
 
-.subscribers {
+.bike-buttons {
     text-align: right;
     flex-basis: 25%;
 }
 
-.subscribers button {
+.bike-buttons button {
     padding: 0.2rem 0.5rem;
     border: none;
     border-radius: 0.3rem;
     color: white;
     cursor: pointer;
-    width: 100%;
+    width: 10em;
+    background-color: rgba(73, 72, 72, 0.7);
 }
 
-.subscribe {
-    /* background-color: green; */
-}
-
-.unsubscribe {
-    /* background-color: red; */
-}
 
 time {
     font-weight: bold;
@@ -305,9 +308,9 @@ footer {
 display: flex;
 align-items: center;
 justify-content: space-evenly;
-/* background-color:#454b52; */
-background-color: rgba(73, 72, 72, 0.2);
-height: 8vh;
+background-color:#454b52;
+/* background-color: rgba(73, 72, 72, 0.2); */
+height:17vh;
 color: white;
 text-shadow: 1px 1px black;
 text-align: center;
