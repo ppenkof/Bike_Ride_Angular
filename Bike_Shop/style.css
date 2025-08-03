@@ -192,9 +192,9 @@ main {
     border-radius: 0.3em;
     font-size: 0.8em;
     margin-top: 1em;
-    background-color: #272625d7;
-    opacity: 0.5;
-        /* gggggggggg */
+    /* background-color: #272625d7; */
+    /* opacity: 0.5; */
+    background-color: rgba(73, 72, 72, 0.1);
     
 }
 
@@ -208,8 +208,14 @@ main {
 }
 
 .columns {
-    display: flex;
-    justify-content: space-between;
+    img{
+        width: 100%;
+        height: auto;
+        border-radius: 0.2em;
+        margin: 1em, auto;
+    }
+    display: block;
+    /* justify-content: space-between; */
     margin-top: 0.7rem;
     color: white;
     text-shadow: 1px 1px rgb(0, 0, 0);
