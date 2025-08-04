@@ -184,8 +184,12 @@ main {
     border-radius: 0.3em;
     font-size: 0.8em;
     margin-top: 1em;
-    background-color: rgba(73, 72, 72, 0.1);
+    background-color: rgba(73, 72, 72, 0.25);
     
+}
+
+.name-wrapper {
+    background-color: rgba(73, 72, 72, 0.7);
 }
 
 .bike-title {
@@ -218,13 +222,17 @@ main {
 .bike-buttons button {
     padding: 0.2rem 0.5rem;
     border: none;
-    border-radius: 0.3rem;
+    border-radius: 0.8rem;
     color: white;
     cursor: pointer;
     width: 10em;
     background-color: rgba(73, 72, 72, 0.7);
 }
 
+button:hover {
+    scale: 1.1;
+    /* background-color: rgba(22, 21, 21, 0.7); */
+}
 
 time {
     font-weight: bold;
