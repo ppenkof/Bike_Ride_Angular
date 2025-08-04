@@ -4,12 +4,6 @@
 @import url('responsive.css');
 @import url(images);
 
-html{
-    /* font-size: 16px; */
-    /* font-family: 'Open Sans', sans-serif; */
-    /* color: #333; */
-    /* scroll-behavior: smooth; */
-}
 
 
 body {
@@ -47,7 +41,6 @@ span {
 }
 
 button {
-    /* background-color: #4ebced; */
     color: white;
 }
 
@@ -60,7 +53,6 @@ button:hover {
 header {
    min-width: 100%;
     background:#454b52;
-    /* background-color: rgba(73, 72, 72, 0.1); */
     position: sticky;
     top: 0%;
 ;
@@ -87,11 +79,9 @@ header li {
     list-style: none;
     margin: .35em;
     padding: 0 .95em;
-    /* background-color: #ff9f00; */
     width: 15vw;
     text-align: center;
     border-radius: 20px;
-    /* text-shadow: 1px 1px rgb(87, 86, 86); */
     text-shadow: 1px 1px black;
 }
 
@@ -111,7 +101,6 @@ header a {
     color: #FFF; 
     padding-bottom: 0;
     text-align: center;
-    /* margin-left: 8em; */
     text-shadow: 1px 1px black;
 }
 
@@ -140,11 +129,7 @@ margin: 0.5em 0;
 
 
 .mini-navbar ul {
-  /* margin-bottom: 40px; */
-  /* margin-right: -50px; */
-  /* margin-left: 6em; */
   margin-right: 1em;
-  /* margin: 1em; */
 }
 
 .mini-navbar ul li {
@@ -153,7 +138,6 @@ margin: 0.5em 0;
     text-align: center;
     padding: 3px;
     border-radius: 20px;
-    /* text-shadow: 1px 1px rgb(95, 94, 94); */
     text-shadow: 1px 1px black;
 }
 .mini-navbar ul li:hover{
@@ -166,33 +150,32 @@ main {
     width: 50%;
 }
 
-/* theme list item */
-.theme-container h1 {
+/* bike items */
+.bike-container h1 {
     text-align: center;
 }
 
-.theme-container a {
+.bike-container a {
     text-decoration: none;
     color: inherit;
 }
 
-.theme-container span {
+.bike-container span {
     font-weight: bold;
 }
 
-.theme-container h2, p {
+.bike-container h2, p {
     padding: 0.3em 0 0.2em;
     margin: 0;
 }
-.theme-container h2 {
+.bike-container h2 {
     padding: 0.3em 0 0.2em;
     margin: 0;
-    /* background-color: #234465; */
     color: white;
     text-shadow: 1px 1px rgb(121, 117, 117);
     border-radius: 10px;
 }
-.theme-name-wrapper {
+.bike-name-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -201,17 +184,15 @@ main {
     border-radius: 0.3em;
     font-size: 0.8em;
     margin-top: 1em;
-    /* background-color: #272625d7; */
-    /* opacity: 0.5; */
     background-color: rgba(73, 72, 72, 0.1);
     
 }
 
-.theme-title {
+.bike-title {
     padding: 0;
 }
 
-.theme-name {
+.bike-name {
     width: 100%;
 
 }
@@ -224,7 +205,6 @@ main {
         margin: 1em, auto;
     }
     display: block;
-    /* justify-content: space-between; */
     margin-top: 0.7rem;
     color: white;
     text-shadow: 1px 1px rgb(0, 0, 0);
@@ -250,57 +230,6 @@ time {
     font-weight: bold;
 }
 
-/* aside  */
-
-/* aside {
-    width: 29%;
-    margin-top: 1em;
-    font-size: 0.8em;
-}
-
-.aside * {
-    margin: 0;
-    padding: 0;
-}
-
-.aside>div {
-    border: 1px solid #999;
-    border-radius: 0.3em;
-    padding: 0.3em 0.5em;
-}
-
-.title {
-    font-size: 1.5em;
-    border-bottom: none;
-}
-
-.aside .aside-theme {
-    margin: 1rem 0;
-    padding: 0.5rem 0;
-}
-
-.aside h3 {
-    border-bottom: none;
-    border-radius: 0.3rem;
-    font-size: 1.2rem;
-    background-color:#306085;
-    padding-left: 0.5rem;
-    color: white;
-    text-shadow: 1px 1px rgb(43, 42, 42);
-}
-
-.aside-theme+.aside-theme {
-    border-top: dashed 1px #999;
-}
-
-.aside-theme p {
-    text-align: right;
-}
-
-.aside-theme a {
-    text-decoration: none;
-    color: inherit;
-} */
 
 /* footer  */
 
@@ -309,7 +238,6 @@ display: flex;
 align-items: center;
 justify-content: space-evenly;
 background-color:#454b52;
-/* background-color: rgba(73, 72, 72, 0.2); */
 height:17vh;
 color: white;
 text-shadow: 1px 1px black;
