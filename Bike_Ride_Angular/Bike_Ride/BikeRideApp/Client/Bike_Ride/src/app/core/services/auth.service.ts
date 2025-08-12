@@ -8,13 +8,14 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'http://localhost:3030/users';
   private _isLoggedIn = signal<boolean>(false);
   private _currentUser = signal<User | null>(null); // Adjust type as necessary
-  
+  private _token = signal<string | null>(null);
 
   public isLoggedIn = this._isLoggedIn.asReadonly();
-  public currentUser = this._currentUser.asReadonly();  
+  public currentUser = this._currentUser.asReadonly();
+  public token = this._token.asReadonly();  
 
 constructor(private httpClient: HttpClient) {
     const savedUser = localStorage.getItem('currentUser');
@@ -22,6 +23,7 @@ constructor(private httpClient: HttpClient) {
       const user = JSON.parse(savedUser);
       this._currentUser.set(user);
       this._isLoggedIn.set(true);
+      this._token.set(this.getToken()); // Assuming getToken() returns a valid token
     }
   }
 
@@ -59,15 +61,24 @@ register(username: string, email: string, phone: string, password: string, rePas
 }
 
 logout(): Observable<void> {
-  return this.httpClient.post<void>(`${this.apiUrl}/logout`, {}, {
-      withCredentials: true
-  }).pipe(
-      tap(() => {
-          this._currentUser.set(null);
-          this._isLoggedIn.set(false);
-          localStorage.removeItem('currentUser');
-      })
-  );
+  // return this.httpClient.post<void>(`${this.apiUrl}/logout`, {}, {
+  //     withCredentials: true
+  // }).pipe(
+  //     tap(() => {
+  //         this._currentUser.set(null);
+  //         this._isLoggedIn.set(false);
+  //         localStorage.removeItem('currentUser');
+  //     })
+  // );
+
+  return this.httpClient.get<void>(`${this.apiUrl}/logout`, {}).pipe(
+    tap(() => {
+        this._currentUser.set(null);
+        this._isLoggedIn.set(false);
+        localStorage.removeItem('currentUser');
+    })
+);
+
 }
 
   getCurrentUserId(): string | null {
@@ -75,7 +86,7 @@ logout(): Observable<void> {
   }
 
   update(user: User): Observable<User> {
-    return this.httpClient.put<ApiUser>(`${this.apiUrl}/users/${user.id}`, {
+    return this.httpClient.put<ApiUser>(`${this.apiUrl}/${user.id}`, {
         _id: user.id,
         username: user.username,
         email: user.email,
@@ -92,7 +103,7 @@ logout(): Observable<void> {
 }
 
 getToken(): string {
-  return "FAKE_TOKEN=12132";
+  return localStorage.getItem('token') || ''; // It could be refactore, so we return an empty string if not found
 }
 
 private mapApiUserToUser(apiUser: ApiUser): User {
