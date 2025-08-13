@@ -2,7 +2,7 @@
 @import url('layout.css');
 @import url('typography.css');
 @import url('responsive.css');
-@import url(images);
+@import url(../../Bike_Ride/public);
 
 
 
@@ -13,7 +13,7 @@ body {
     min-height: 100vh;
     font-optical-sizing: auto;
     background-color: #e4e3e3;
-    background-image: url('images/Mountainbiken\ am\ Kitzsteinhorn_\(C\)Kitzsteinhorn.jpg');
+    background-image: url('../../Bike_Ride/public/Mountainbiken\ am\ Kitzsteinhorn_\(C\)Kitzsteinhorn.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; 

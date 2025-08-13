@@ -1,1 +1,44 @@
-<p>home works!</p>
+<div class="welcome">
+    <h3>Welcome!</h3>
+    <p>This MTB Website is a place, where you can book a test ride on a bike and like it. You can also see which bikes are the most liked.</p>
+  
+    @if (!isLoggedIn()) {
+    <div class="logged">
+      <ul>
+        <li>
+          <a routerLink="/login">
+            <i class="fas fa-sign-in-alt"></i>
+            Test Ride
+          </a>
+        </li>
+        <!-- <li>
+          <a routerLink="/register">
+            <i class="fas fa-user-plus"></i>
+            Register
+          </a>
+        </li> -->
+        <!-- <li>
+            <a routerLink="/login">
+              <i class="fas fa-test-ride"></i>
+              Test Ride
+            </a>
+          </li> -->
+      </ul>
+    </div>
+    } @else {
+    <div class="logged">
+      <p>Welcome back, {{ currentUser()?.username }}!</p>
+      <!-- redirect to book a test ride -->
+      <ul>
+        <li>
+          <a routerLink="/bikes">
+            <i class="fas fa-test-ride"></i>
+            Test Ride
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    }
+  </div>
+
