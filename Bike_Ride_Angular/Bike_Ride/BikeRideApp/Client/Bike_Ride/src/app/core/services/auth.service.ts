@@ -31,7 +31,12 @@ login(email: string, password: string): Observable<User> {
     return this.httpClient.post<ApiUser>(`${this.apiUrl}/login`, { email, password }, {
       withCredentials: true
     }).pipe(
-      map(apiUser => this.mapApiUserToUser(apiUser)), 
+      map(apiUser => 
+        {     const user = this.mapApiUserToUser(apiUser);
+              this._token.set(apiUser.accessToken); // Store token in signal
+              localStorage.setItem('token', apiUser.accessToken); // Persist token
+              return user;
+            }), 
       tap(user => {
         this._currentUser.set(user);
         this._isLoggedIn.set(true);
@@ -50,7 +55,12 @@ register(username: string, email: string, phone: string, password: string, rePas
   }, {
       withCredentials: true
     }).pipe(
-        map(apiUser => this.mapApiUserToUser(apiUser)),
+        map(apiUser => 
+          { const user = this.mapApiUserToUser(apiUser);
+            this._token.set(apiUser.accessToken); // ✅ Store token
+            localStorage.setItem('token', apiUser.accessToken); // ✅ Persist token
+            return user;
+          }),
         tap(user => {
             this._currentUser.set(user);
             this._isLoggedIn.set(true);
@@ -102,8 +112,8 @@ logout(): Observable<void> {
     );
 }
 
-getToken(): string {
-  return localStorage.getItem('token') || ''; // It could be refactore, so we return an empty string if not found
+getToken(): string | null {
+  return this._token() || localStorage.getItem('token'); // It could be refactore, so we return an empty string if not found
 }
 
 private mapApiUserToUser(apiUser: ApiUser): User {

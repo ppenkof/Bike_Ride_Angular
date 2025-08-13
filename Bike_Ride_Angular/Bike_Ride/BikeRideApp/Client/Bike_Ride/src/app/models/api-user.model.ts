@@ -3,4 +3,5 @@ export interface ApiUser {
     tel: string;
     email: string;
     username: string
+    accessToken: string;
 }

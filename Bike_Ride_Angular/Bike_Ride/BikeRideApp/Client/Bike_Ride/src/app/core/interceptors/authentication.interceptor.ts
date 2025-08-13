@@ -7,12 +7,13 @@ export const AuthenticationInterceptor: HttpInterceptorFn = (req, next) => {
 
     const token = authService.getToken();
     
+if(token) {
     const authenticationRequest = req.clone({
-        setHeaders: {
-            Authorization: `Bearer ${token}`
-        }
-    });
-    
+            headers: req.headers.set('X-Authorization', token)
+        });
     return next(authenticationRequest);
+}
+    
+    return next(req);
 
 }
