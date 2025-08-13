@@ -1,9 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Footer, Header, ErrorNotification} from './shared/components';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, 
+            Footer, 
+            Header,
+            ErrorNotification],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
