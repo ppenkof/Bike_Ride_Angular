@@ -1,16 +1,29 @@
 .login {
-    max-width: 400px;
+    max-width: 40%;
     margin: 2rem auto;
     padding: 2rem;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background: white;
+    background-color: #686666;
+    padding: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+
 }
 
 .login fieldset {
+    border-radius: 0.5em;
+    padding: 1em;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    border: none;
+
+    min-height: 63vh;
+    align-content: center;
+
     border: none;
     padding: 0;
 }
+
 
 .login h2 {
     text-align: center;
@@ -20,7 +33,9 @@
 
 .field {
     position: relative;
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
+    margin: 1.5rem;
+
 }
 
 .field-icon {
@@ -37,7 +52,7 @@
 .field-icon input {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 3rem;
-    border: 1px solid #ddd;
+    border: 1px solid #838282;
     border-radius: 4px;
     font-size: 1rem;
 }
@@ -49,11 +64,12 @@
 .error {
     color: #dc3545;
     font-size: 0.875rem;
-    margin-top: 0.25rem;
+    /* margin-top: 0.25rem; */
+    margin: 1.5rem;
 }
 
 button {
-    width: 100%;
+    width: 50%;
     padding: 0.75rem;
     background-color: #007bff;
     color: white;
@@ -61,7 +77,10 @@ button {
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem;
+    margin-left: 6rem; */
+    margin: 2rem 8rem;
+
 }
 
 button:disabled {

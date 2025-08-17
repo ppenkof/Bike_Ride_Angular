@@ -10,3 +10,9 @@ footer {
     text-shadow: 1px 1px black;
     text-align: center;
     }
+footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0.3em;
+}

@@ -13,4 +13,5 @@ export class Home {
 private authService = inject(AuthService);
 readonly isLoggedIn = this.authService.isLoggedIn;
 readonly currentUser = this.authService.currentUser;
+
 }

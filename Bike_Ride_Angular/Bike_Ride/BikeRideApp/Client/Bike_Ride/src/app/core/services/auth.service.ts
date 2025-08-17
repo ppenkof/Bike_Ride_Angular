@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, OnInit } from '@angular/core';
 import { User, ApiUser } from '../../models';
 import { tap, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -12,10 +12,13 @@ export class AuthService {
   private _isLoggedIn = signal<boolean>(false);
   private _currentUser = signal<User | null>(null); // Adjust type as necessary
   private _token = signal<string | null>(null);
+  private _isAdmin = signal<boolean>(false); // Assuming you might need this for admin checks
+  private _adminArr = ['admin@abv.bg', 'george@abv.bg', 'peter@abv.bg'];
 
   public isLoggedIn = this._isLoggedIn.asReadonly();
   public currentUser = this._currentUser.asReadonly();
-  public token = this._token.asReadonly();  
+  public token = this._token.asReadonly();
+  public isAdmin = this._isAdmin.asReadonly(); // Readonly signal for admin status  
 
 constructor(private httpClient: HttpClient) {
     const savedUser = localStorage.getItem('currentUser');
@@ -24,12 +27,14 @@ constructor(private httpClient: HttpClient) {
       this._currentUser.set(user);
       this._isLoggedIn.set(true);
       this._token.set(this.getToken()); // Assuming getToken() returns a valid token
+      this._isAdmin.set(this.isUserAdmin(user.email)); // Assuming user has an isAdmin property
     }
   }
 
+
 login(email: string, password: string): Observable<User> {
     return this.httpClient.post<ApiUser>(`${this.apiUrl}/login`, { email, password }, {
-      withCredentials: true
+      withCredentials: false //It is not necessary to send cookies with this request
     }).pipe(
       map(apiUser => 
         {     const user = this.mapApiUserToUser(apiUser);
@@ -41,6 +46,7 @@ login(email: string, password: string): Observable<User> {
         this._currentUser.set(user);
         this._isLoggedIn.set(true);
         localStorage.setItem('currentUser', JSON.stringify(user));
+        this._isAdmin.set(this.isUserAdmin(user.email)); // Check if the user is an admin
       })
     ); 
 }
@@ -53,12 +59,13 @@ register(username: string, email: string, phone: string, password: string, rePas
     password,
     rePassword
   }, {
-      withCredentials: true
+      withCredentials: false //It is not necessary to send cookies with this request
     }).pipe(
         map(apiUser => 
           { const user = this.mapApiUserToUser(apiUser);
             this._token.set(apiUser.accessToken); // ✅ Store token
             localStorage.setItem('token', apiUser.accessToken); // ✅ Persist token
+            console.log(`Token set: ${apiUser.accessToken}`); // ✅ Debugging log
             return user;
           }),
         tap(user => {
@@ -71,24 +78,20 @@ register(username: string, email: string, phone: string, password: string, rePas
 }
 
 logout(): Observable<void> {
-  // return this.httpClient.post<void>(`${this.apiUrl}/logout`, {}, {
-  //     withCredentials: true
-  // }).pipe(
-  //     tap(() => {
-  //         this._currentUser.set(null);
-  //         this._isLoggedIn.set(false);
-  //         localStorage.removeItem('currentUser');
-  //     })
-  // );
-
-  return this.httpClient.get<void>(`${this.apiUrl}/logout`, {}).pipe(
+    const repsponse = this.httpClient.get<void>(`${this.apiUrl}/logout`, {}).pipe(
     tap(() => {
         this._currentUser.set(null);
         this._isLoggedIn.set(false);
+        this._token.set(null); // Clear token signal
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('token'); 
+        this._isAdmin.set(false); // Clear admin status
+        localStorage.clear(); // Clear all local storage
     })
 );
+console.log(`Logout called, current user: ${repsponse}`); // Debugging log
 
+return repsponse;
 }
 
   getCurrentUserId(): string | null {
@@ -102,7 +105,7 @@ logout(): Observable<void> {
         email: user.email,
         tel: user.phone       
     }, {
-        withCredentials: true
+        withCredentials: false //It is not necessary to send cookies with this request
     }).pipe(
         map(apiUser => this.mapApiUserToUser(apiUser)),
         tap(user => {
@@ -116,12 +119,23 @@ getToken(): string | null {
   return this._token() || localStorage.getItem('token'); // It could be refactore, so we return an empty string if not found
 }
 
+converImageUrl(imageUrl:string): string {
+  let newURL = imageUrl.replace(/^\/?/, '');
+  console.log(`Converted image URL: ${newURL}`);
+  return newURL;
+}
+
+private isUserAdmin(email: string): boolean {
+  return this._adminArr.includes(email);
+}
+
 private mapApiUserToUser(apiUser: ApiUser): User {
   return <User> {
       id: apiUser._id,
       username: apiUser.username,
       email: apiUser.email,
-      phone: apiUser.tel
+      phone: apiUser.tel,
+      accessToken: apiUser.accessToken
   };
 }
 }

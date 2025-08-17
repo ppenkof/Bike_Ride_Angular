@@ -1,19 +1,31 @@
 .welcome {
+
     text-align: center;
     padding: 2rem;
+
+    min-height: 76vh;
+    /* position:; */
+    align-content: center;
+
 }
 
 .welcome h3 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #333;
+    /* color: #666; */
+    color: #fafafa;
+    /* color: rgb(95, 187, 76); */
+    font-weight: 400;
 }
 
 .welcome p {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     line-height: 1.6;
     margin-bottom: 2rem;
-    color: #666;
+    color: #fafafa;
+    /* color: rgb(62, 143, 42); */
+    font-weight: 400;
+    
 }
 
 .logged ul {
@@ -29,7 +41,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background-color: rgba(73, 72, 72, 0.7);
+    background-color: rgba(73, 72, 72, 0.9);
     color: white;
     text-decoration: none;
     border-radius: 5px;

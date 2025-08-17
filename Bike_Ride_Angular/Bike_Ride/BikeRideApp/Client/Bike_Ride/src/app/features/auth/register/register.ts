@@ -20,8 +20,8 @@ export class Register implements AfterViewInit {
   constructor() {
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(5)]],
-      email: ['', [Validators.required, Validators.pattern(/^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@gmail\.(com|bg)$/)]],
-      phone: [''],
+      email: ['', [Validators.required, Validators.pattern(/^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z]{3}\.(com|bg)$/)]],
+      phone: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/[0-9]*/)]],
       passwords: this.formBuilder.group({
         password: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/^[a-zA-Z0-9]+$/)]],
         rePassword: ['', Validators.required]
@@ -65,6 +65,10 @@ export class Register implements AfterViewInit {
 
   get isEmailValid(): boolean {
     return this.email?.invalid && (this.email?.dirty || this.email?.touched) || false;
+  }
+
+  get isPhonelValid(): boolean {
+    return this.phone?.invalid && (this.phone?.dirty || this.phone?.touched) || false;
   }
 
   get isPasswordsValid(): boolean {
@@ -115,6 +119,22 @@ export class Register implements AfterViewInit {
     return '';
   }
 
+  get phoneErrorMessage(): string {
+    if (this.phone?.errors?.['required']) {
+      return 'Phone is required!';
+    }
+
+    if (this.phone?.errors?.['minlength']) {
+      return 'Password must be at least 8 characters!';
+    }
+
+    if (this.phone?.errors?.['pattern']) {
+      return 'Phone is not valid!';
+    }
+
+    return '';
+  }
+
   get rePasswordErrorMessage(): string {
     if (this.password?.errors?.['required']) {
       return 'Password is required!';
@@ -146,6 +166,8 @@ export class Register implements AfterViewInit {
         rePassword).subscribe({
           next: () => {
             this.router.navigate(['/home']);
+            //**** */
+            console.log('Registration successful');
           },
           error: (err) => {
             console.log('Registration failed', err)
@@ -174,6 +196,7 @@ export class Register implements AfterViewInit {
     const rePassword = passwordsControl.get('rePassword');
 
     if (password && rePassword && password.value !== rePassword.value) {
+      console.log('Passwords do not match');
       return { passwordMismatch: true };
     }
 

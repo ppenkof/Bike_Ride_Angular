@@ -49,6 +49,11 @@
           placeholder="885 888 888"
           formControlName="phone">
       </p>
+      @if (isPhonelValid) {
+        <p class="error">
+          {{ phoneErrorMessage }}
+        </p>
+      }
      
       <!-- password -->
       <div formGroupName="passwords">
@@ -86,12 +91,13 @@
         }
       </div>
 
-      <button [disabled]="registerForm.valid">Create Account</button>
+      <button [disabled]="registerForm.invalid">Create Account</button>
 
       <p class="text-center">
         Have an account?
         <a routerLink="/login">Log In</a>
       </p>
+
     </fieldset>
   </form>
 

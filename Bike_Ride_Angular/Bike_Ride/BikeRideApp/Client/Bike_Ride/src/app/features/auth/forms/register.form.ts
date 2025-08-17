@@ -1,6 +1,8 @@
 import { inject, Injectable } from "@angular/core";
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 
+// TBD - This derective MUST be used in the register and the login forms to validate that the password and rePassword fields match!!!
+
 @Injectable({
     providedIn: 'root'
 })
@@ -10,8 +12,8 @@ export class RegisterFormService {
     createForm(): FormGroup {
         return this.formBuilder.group({
             username: ['', [Validators.required, Validators.minLength(5)]],
-            email: ['', [Validators.required, Validators.pattern(/^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@gmail\.(com|bg)$/)]],
-            phone: [''],
+            email: ['', [Validators.required, Validators.pattern(/^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z]{3}\.(com|bg)$/)]],
+            phone: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/[0-9]*/)]],
             passwords: this.formBuilder.group({
                 password: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/^[a-zA-Z0-9]+$/)]],
                 rePassword: ['', [Validators.required]],
@@ -100,6 +102,21 @@ export class RegisterFormService {
         }
         if (passwordsGroup?.errors?.['passwordMismatch']) {
             return 'Passwords do not match!';
+        }
+        return '';
+    }
+
+    getPhoneErrorMessage(form: FormGroup): string {
+        const control = this.getPhoneControl(form);
+
+        if (control?.errors?.['required']) {
+            return 'Phone is required!';
+        }
+        if (control?.errors?.['minlength']) {
+            return 'Phone should be at least 8 characters!';
+        }
+        if (control?.errors?.['pattern']) {
+            return 'Phone should contain only digits!';
         }
         return '';
     }

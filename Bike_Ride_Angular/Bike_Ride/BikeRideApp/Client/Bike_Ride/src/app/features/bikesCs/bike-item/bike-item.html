@@ -1,1 +1,74 @@
-<p>bike-item works!</p>
+<div class="bike-container">
+    <!-- <div class="bike-name-wrapper"> -->
+        <!-- <div class="bike-name"> -->
+            <!-- <a routerLink="/bikes/{{bike.id}}" class="normal"> -->
+                <!-- <h2>{{bike.bikeName}} </h2> //<h2>{{bike.bikeName | sliceTitle}} </h2> -->
+            <!-- </a> -->
+            <!-- <div class="columns"> -->
+                <!-- <div class="name-wrapper"> -->
+                    <!-- <h2 class="bike-type">{{bike.type}}</h2> -->
+            <!-- </div> -->
+                
+                    <!-- <p>Date: <time>{{bike.created_at | date: 'dd.MM.yyyy HH:mm:ss'}}</time></p> -->
+                    <!-- <div class="nick-name">
+                        <p>Username: <span>{{bike.userId.username}}</span></p>
+                    </div> -->
+                <!-- </div> -->
+                <!-- <div class="subscribers"> -->
+                     <!-- @if (isLoggedIn){ && bike.userId.id !== currentUserId) { -->
+                        <!-- @if (isSubscribed(bike.id)) { -->
+                            <!-- <button class="unsubscribe" (click)="toggleSubscribe(bike.id)">Unsubscribe</button> -->
+                        <!-- } @else { -->
+                            <!-- <button class="subscribe" (click)="toggleSubscribe(bike.id)">More details</button> -->
+                        <!-- } -->
+                    <!-- } -->
+                    <!-- <p>Subscribers: <span>{{bike.subscribers.length}}</span></p> -->
+
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+
+    <div class="bike-title">   
+        <!-- bike component  -->
+        <div class="bike-container">
+            <!-- <h1>Most Popular Bikes</h1> -->
+            <div class="bike-name-wrapper">
+                
+                <div class="bike-name">
+                    <a href="#" class="normal">
+                        <div class="name-wrapper"> 
+                            <h2>{{bike.type}}</h2>
+                        </div> 
+                    </a>
+                    <div class="columns">
+                        <div>
+                            <p>{{bike.bikeName}}</p>
+                            <div class="nick-name">
+                                <p>Body:<span><img src={{converUrl(bike.imageUrl)}} alt=""></span></p>
+                            </div>
+                            <div>
+                                <p>Decsription:</p> <p>{{truncateDescription(true)}}</p>
+                            </div>
+                        </div>
+                        <div class="bike-buttons">
+                            <!-- <button class=""></button> -->
+                             @if (isLoggedIn)  {
+                        @if (isSubscribed(bike.id)) {
+                            <button class="unsubscribe" (click)="toggleSubscribe(bike.id)">Test ride</button>
+                        } @else {
+                            <button class="info" (click)="toggleSubscribe(bike.id)" >More Info</button>
+                            <button class="ride" (click)="toggleSubscribe(bike.id)">Test Ride</button>
+                        }
+                    }
+                    <!-- <p>Subscribers: <span>{{bike.subscribers.length}}</span></p> -->
+
+                            <p>Price: <span>{{bike.price}}$</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

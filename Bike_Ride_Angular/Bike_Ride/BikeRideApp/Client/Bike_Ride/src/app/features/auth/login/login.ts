@@ -15,12 +15,13 @@ export class Login {
   private authService = inject(AuthService);
   private router = inject(Router);
   private formBuilder = inject(FormBuilder);
+  //private updateUserData= inject(AuthService).ngOnInit;
 
   loginForm: FormGroup;
 
   constructor() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern(/^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@gmail\.(com|bg)$/)]],
+      email: ['', [Validators.required, Validators.pattern(/^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z]{3}\.(com|bg)$/)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }

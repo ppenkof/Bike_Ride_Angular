@@ -1,4 +1,3 @@
-export * from './posts.service';
-export * from './themes.service';
+export * from './bikes.service';
 export * from './auth.service';
 export * from './error.service';

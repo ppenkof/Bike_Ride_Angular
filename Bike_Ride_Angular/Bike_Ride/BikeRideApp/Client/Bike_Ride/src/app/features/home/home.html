@@ -1,6 +1,11 @@
 <div class="welcome">
+  <!-- @if(currentUser()?.username == null) {
     <h3>Welcome!</h3>
-    <p>This MTB Website is a place, where you can book a test ride on a bike and like it. You can also see which bikes are the most liked.</p>
+  } @else { 
+    <h3>Welcome{{`, ` + currentUser()?.username}}!</h3>
+  } -->
+    <h3>Welcome!</h3>
+    <p>This MTB Website is a place, where you can book a test ride of a bike and like it. You can also see which bikes are the most liked.</p>
   
     @if (!isLoggedIn()) {
     <div class="logged">
@@ -11,18 +16,6 @@
             Test Ride
           </a>
         </li>
-        <!-- <li>
-          <a routerLink="/register">
-            <i class="fas fa-user-plus"></i>
-            Register
-          </a>
-        </li> -->
-        <!-- <li>
-            <a routerLink="/login">
-              <i class="fas fa-test-ride"></i>
-              Test Ride
-            </a>
-          </li> -->
       </ul>
     </div>
     } @else {

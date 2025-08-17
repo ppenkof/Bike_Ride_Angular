@@ -7,6 +7,10 @@ header {
      top: 0%;
  ;
  }
+
+ img{
+    background-image: url('../../../../assets/download.jpg');
+ }
  
  header ul {
      padding: 0;
@@ -71,9 +75,9 @@ header {
  .mini-navbar-wrap {
      display: flex;
      flex-direction: row;
-     justify-content: space-between;
+     justify-content: space-around;
      align-items: center;
-     width: 90%;
+     width: 95%;
      margin: auto;
  }
  
@@ -84,9 +88,9 @@ header {
  
  .mini-navbar ul li {
      background-color: #acaba9;
-     width: 11vw;
+     width: 14vw;
      text-align: center;
-     padding: 3px;
+     padding: 1px;
      border-radius: 20px;
      text-shadow: 1px 1px black;
  }

@@ -1,10 +1,7 @@
-@import url('reset.css');
-@import url('layout.css');
-@import url('typography.css');
-@import url('responsive.css');
-@import url(../../Bike_Ride/public);
-
-
+@import url('../src/styles/reset.css');
+@import url('../src/styles/layout.css');
+@import url('../src/styles/typography.css');
+@import url('../src/styles/responsive.css');
 
 body {
     max-width: 100%;
@@ -13,7 +10,7 @@ body {
     min-height: 100vh;
     font-optical-sizing: auto;
     background-color: #e4e3e3;
-    background-image: url('../../Bike_Ride/public/Mountainbiken\ am\ Kitzsteinhorn_\(C\)Kitzsteinhorn.jpg');
+    background-image: url('../public/BackGroundPicture.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; 
@@ -243,7 +240,7 @@ time {
 
 footer {
 display: flex;
-align-items: center;
+align-items: end;
 justify-content: space-evenly;
 background-color:#454b52;
 height:17vh;

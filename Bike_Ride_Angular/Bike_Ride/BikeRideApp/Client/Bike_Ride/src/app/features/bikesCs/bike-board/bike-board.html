@@ -1,1 +1,22 @@
-<p>bike-board works!</p>
+@if (isLoggedIn()) {
+    <div class="welcome">
+        @if(currentUser()?.username == null) {
+            <h3>Welcome!</h3>
+          } @else { 
+            <h3>Welcome{{`, ` + currentUser()?.username}}!</h3>
+          }
+        <p>This MTB Website is a place, where you can book a test ride of a bike and like it. You can also see which bikes are the most liked.</p>
+        
+        <div class="container">
+            <main>
+                <div class="bike-title">
+                    @for (bike of bikes$ | async; track bike.id) {
+                    <app-bike-item [bike]="bike"></app-bike-item>
+                    }
+                </div>
+            </main>
+        </div>
+    </div>
+    }
+    
+   
