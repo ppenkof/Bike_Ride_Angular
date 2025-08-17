@@ -5,10 +5,11 @@ footer {
     align-items: center;
     justify-content: space-evenly;
     background-color:#454b52;
-    height:17vh;
+    height:14vh;
     color: white;
     text-shadow: 1px 1px black;
     text-align: center;
+    position: sticky;
     }
 footer a {
     color: white;

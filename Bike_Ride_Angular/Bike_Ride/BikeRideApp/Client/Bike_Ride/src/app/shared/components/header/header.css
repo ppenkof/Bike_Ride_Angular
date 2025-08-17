@@ -8,10 +8,7 @@ header {
  ;
  }
 
- img{
-    background-image: url('../../../../assets/download.jpg');
- }
- 
+
  header ul {
      padding: 0;
      display: flex;
@@ -59,25 +56,26 @@ header {
  }
  
  .logo-wrap {
- display: flex;
- align-items: center;
- justify-content: center;
- margin: 0.5em 0;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    margin: 0.5em 0;
  }
  
- .logo-wrap > a > img {
+ .logo-wrap > img {
      height: 10vh;
-     margin-right: 3vw;
-     margin-left: -4vw;
-     border-radius: 100%;   
+     margin-right: 0.3vw;
+     margin-left: 4vw;
+     border-radius: 100%; 
+
  }
  
  .mini-navbar-wrap {
      display: flex;
      flex-direction: row;
-     justify-content: space-around;
+     justify-content: space-between;
      align-items: center;
-     width: 95%;
+     width: 100%;
      margin: auto;
  }
  
@@ -88,7 +86,7 @@ header {
  
  .mini-navbar ul li {
      background-color: #acaba9;
-     width: 14vw;
+     width: 13vw;
      text-align: center;
      padding: 1px;
      border-radius: 20px;

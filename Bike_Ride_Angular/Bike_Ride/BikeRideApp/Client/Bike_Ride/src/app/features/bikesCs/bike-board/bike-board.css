@@ -45,3 +45,11 @@
     font-size: 1.1rem;
   }
   
+  .container {
+    width: 80%;
+    margin:auto;
+    padding-bottom: 4.5em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}

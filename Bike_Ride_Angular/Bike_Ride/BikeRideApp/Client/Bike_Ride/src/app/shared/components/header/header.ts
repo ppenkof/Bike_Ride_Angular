@@ -13,7 +13,7 @@ export class Header {
   private router = inject(Router);
   //banner img not render
   correctUrl=this.authService.converImageUrl;
-  img='assets/download.jpg';
+  image='assets/download.jpg';
 
   readonly isLoggedIn = this.authService.isLoggedIn;
   readonly currentUser = this.authService.currentUser;

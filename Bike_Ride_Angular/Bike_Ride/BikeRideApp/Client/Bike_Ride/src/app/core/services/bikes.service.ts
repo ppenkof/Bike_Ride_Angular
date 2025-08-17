@@ -58,8 +58,8 @@ getBikes(): Observable<Bike[]> {
 
 
 
-  createBike(bikeName: string, postText: string): Observable<Bike> {
-    return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, { bikeName, postText }, {
+  createBike(bikeName: string, newBike: string): Observable<Bike> {
+    return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, { bikeName, newBike }, {
       withCredentials: false // It is not necessary to send cookies with this request,
     });
   }
