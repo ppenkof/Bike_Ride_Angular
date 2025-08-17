@@ -58,9 +58,49 @@ getBikes(): Observable<Bike[]> {
 
 
 
-  createBike(bikeName: string, newBike: string): Observable<Bike> {
-    return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, { bikeName, newBike }, {
-      withCredentials: false // It is not necessary to send cookies with this request,
-    });
-  }
+  // createBike(bikeName: string, newBike: string): Observable<Bike> {
+  //   return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, { bikeName, newBike }, {
+  //     withCredentials: false // It is not necessary to send cookies with this request,
+  //   });
+  // }
+
+  
+// createBike(bike: Omit<Bike, 'id'>): Observable<Bike> {
+//   const payload = {
+//     name: bike.bikeName,
+//     price: bike.price,
+//     type: bike.type,
+//     description: bike.description,
+//     image: bike.imageUrl,
+//     likes: bike.likes
+//   };
+
+//   return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, payload).pipe(
+//     tap(newBike => {
+//       const currentBikes = this.bikesBehaviorSubject.value;
+//       this.bikesBehaviorSubject.next([...currentBikes, newBike]);
+//     })
+//   );
+// }
+
+
+createBike(name: string, price: number, type: string, description: string, imageUrl: string): Observable<Bike> {
+  const payload = {
+    name,
+    price,
+    type,
+    description,
+    image: imageUrl,
+    likes: 0 // default value
+  };
+
+  return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, payload).pipe(
+    tap(newBike => {
+      const currentBikes = this.bikesBehaviorSubject.value;
+      this.bikesBehaviorSubject.next([...currentBikes, newBike]);
+    })
+  );
+}
+
+
 }
