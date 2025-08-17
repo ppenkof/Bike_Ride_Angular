@@ -17,29 +17,7 @@ export class BikesService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // getBikes(): Observable<Bike[]> { 
-  //   return this.httpClient.get<Bike[]>(`${this.apiUrl}/bikes`)
-  //     .pipe(
-  //       tap(bikes => this.bikesBehaviorSubject.next(bikes))
-  //     );
-  // }
-
-// getBikes(): Observable<Bike[]> {
-//   return this.httpClient.get<BikeRes>(`${this.apiUrl}/bikes`)
-//     .pipe(
-//       tap(response => this.bikesBehaviorSubject.next(Object.values(response ?? {}))),
-//       map(response => Object.values(response ?? {}))
-//     );
-// }
-
-
-// getBikes(): Observable<Bike[]> {
-//   return this.httpClient.get<BikeRes>(`${this.apiUrl}/bikes`)
-//     .pipe(map(response => Object.values(response.product ?? {})),
-//           tap(bikes => this.bikesBehaviorSubject.next(bikes)));
-// }
-
-getBikes(): Observable<Bike[]> {
+  getBikes(): Observable<Bike[]> {
   return this.httpClient.get<BikeRes>(`${this.apiUrl}/bikes`).pipe(
     map(response =>
       Object.entries(response.products ?? {}).map(([uuid, bikeData]) => ({
@@ -48,7 +26,7 @@ getBikes(): Observable<Bike[]> {
         price: bikeData.price,
         type: bikeData.type,
         description: bikeData.description,
-        imageUrl: bikeData.image,
+        image: bikeData.image,
         likes: bikeData.likes
       }))
     ),
@@ -56,51 +34,23 @@ getBikes(): Observable<Bike[]> {
   );
 }
 
-
-
-  // createBike(bikeName: string, newBike: string): Observable<Bike> {
-  //   return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, { bikeName, newBike }, {
-  //     withCredentials: false // It is not necessary to send cookies with this request,
-  //   });
-  // }
-
-  
-// createBike(bike: Omit<Bike, 'id'>): Observable<Bike> {
-//   const payload = {
-//     name: bike.bikeName,
-//     price: bike.price,
-//     type: bike.type,
-//     description: bike.description,
-//     image: bike.imageUrl,
-//     likes: bike.likes
-//   };
-
-//   return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, payload).pipe(
-//     tap(newBike => {
-//       const currentBikes = this.bikesBehaviorSubject.value;
-//       this.bikesBehaviorSubject.next([...currentBikes, newBike]);
-//     })
-//   );
-// }
-
-
-createBike(name: string, price: number, type: string, description: string, imageUrl: string): Observable<Bike> {
+createBike(name: string, price: number, type: string, description: string, image: string): Observable<Bike> {
   const payload = {
     name,
     price,
     type,
     description,
-    image: imageUrl,
+    image,
     likes: 0 // default value
   };
 
   return this.httpClient.post<Bike>(`${this.apiUrl}/bikes`, payload).pipe(
     tap(newBike => {
       const currentBikes = this.bikesBehaviorSubject.value;
+      console.log(`New bike created: ${JSON.stringify(newBike)}`);
       this.bikesBehaviorSubject.next([...currentBikes, newBike]);
     })
   );
 }
-
 
 }

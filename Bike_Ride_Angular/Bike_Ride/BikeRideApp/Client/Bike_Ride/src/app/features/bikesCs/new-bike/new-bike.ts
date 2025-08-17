@@ -20,7 +20,7 @@ export class NewBike {
   descriptionText = '';
   descriptionErrorMessage = '';
   testPrice = 0;
-  tesPriceError = '';
+  tesPriceError = false;
   testPriceErrorMessage = '';
   bikeType = '';
   bikeTypeError = false;
@@ -63,6 +63,7 @@ export class NewBike {
 
   validatePrice(): void {
     if (this.testPrice <= 0) {
+      this.tesPriceError = true;
       this.testPriceErrorMessage = 'Price must be greater than zero.';
       this.testPrice = 0;
     } else {
@@ -87,9 +88,9 @@ export class NewBike {
     if (!this.imageUrl) {
       this.imageError = true;
       this.imageErrorMessage = 'Image URL is required.';
-    } else if (!this.imageUrl.startsWith('bike_info/')) {
+    } else if (!this.imageUrl.startsWith('bikes_info/')) {
       this.imageError = true;
-      this.imageErrorMessage = 'Image URL must start with bike_info/.';
+      this.imageErrorMessage = 'Image URL must start with bikes_info/';
     } else {
       this.imageError = false;
       this.imageErrorMessage = '';
@@ -109,12 +110,15 @@ export class NewBike {
   onSubmit(): void {
     this.validateName();
     this.validateDescription();
+    this.validatePrice();
+    this.validateType();
+    this.validateImage();
 
     if (this.isFormValid()) {
       this.bikesService.createBike(this.bikeName, this.testPrice, this.bikeType, this.descriptionText, this.imageUrl)
         .subscribe({
           next: () => {
-            this.router.navigate(['/bikes'])
+            this.router.navigate(['/home'])//this.router.navigate(['/bikes'])
           },
           error: (err) => {
             console.log('New bike failed', err);

@@ -10,8 +10,7 @@ export interface BikeRes {
        description: string;
        image: string;
        likes: number;
-       bestSeller?: boolean;
-     };
+      };
    };
  }
  

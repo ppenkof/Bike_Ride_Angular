@@ -119,12 +119,6 @@ getToken(): string | null {
   return this._token() || localStorage.getItem('token'); // It could be refactore, so we return an empty string if not found
 }
 
-converImageUrl(imageUrl:string): string {
-  let newURL = imageUrl.replace(/^\/?/, '');
-  console.log(`Converted image URL: ${newURL}`);
-  return newURL;
-}
-
 private isUserAdmin(email: string): boolean {
   return this._adminArr.includes(email);
 }

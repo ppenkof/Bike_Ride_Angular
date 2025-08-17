@@ -19,7 +19,7 @@ export class BikeItem {
 
   private authService = inject(AuthService);
   private sliceTitle = inject(SliceTitlePipe);
-  converUrl=this.authService.converImageUrl;
+  //converUrl=this.authService.converImageUrl;
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -43,6 +43,12 @@ export class BikeItem {
   truncateDescription(isTruncate: boolean): string {
     const truncated = this.sliceTitle.transform(this.bike.description, 50, isTruncate);
     return truncated;
+  }
+
+  converImageUrl(imageUrl:string): string | null {
+    let newURL = imageUrl.replace(/^\/?/, '');
+    console.log(`Converted image URL: ${newURL}`);
+    return newURL;
   }
 
 }

@@ -11,10 +11,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class Header {
   protected authService = inject(AuthService);
   private router = inject(Router);
-  //banner img not render
-  correctUrl=this.authService.converImageUrl;
-  image='assets/download.jpg';
-
+  
   readonly isLoggedIn = this.authService.isLoggedIn;
   readonly currentUser = this.authService.currentUser;
   readonly isAdmin = this.authService.isAdmin;
