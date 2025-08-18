@@ -1,0 +1,71 @@
+.profile {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #666;
+    border-radius: 8px;
+    background: rgba(60, 60, 60, 0.5);
+    text-align: center;
+}
+
+.profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid #ccc;
+}
+
+.profile h3 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.2rem;
+    border-bottom: 1px solid #eee;
+    background-color: #ccc;
+}
+
+.flex:last-of-type {
+    border-bottom: none;
+}
+
+.flex p:first-child {
+    font-weight: bold;
+    color: #333;
+}
+
+.flex p:last-child {
+    color: #666;
+}
+
+.edit-button {
+    margin-top: 1.3rem;
+    padding: 0.3em 2em;
+    background-color: #454b52;
+    color: white;
+    border: none;
+    border-radius: 2em;
+    font-size: 1rem;
+    cursor: pointer;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+}
+
+
+.edit-button:active {
+    border-width: 2px;
+    border-style: inset;
+    border-color: buttonborder;
+}
+
+.edit-button:hover {
+    cursor: pointer;
+}
+

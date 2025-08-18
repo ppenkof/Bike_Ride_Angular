@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Footer, Header, ErrorNotification, NotFound} from './shared/components';
+import { Profile } from './features/profile/profile';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Footer, Header, ErrorNotification, NotFound} from './shared/components'
   imports: [RouterOutlet, 
             Footer, 
             Header,
-            ErrorNotification, NotFound],
+            ErrorNotification],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

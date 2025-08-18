@@ -22,7 +22,8 @@
                     <a routerLink="/bikes">more bikes</a>
                 </li>
                 <li>
-                    <a routerLink="/profile">{{ currentUser()?.username }}'s profile</a>
+                    <!-- /:{{ currentUser()?.id }}" -->
+                    <a routerLink="/profile">{{ currentUser()?.username }}'s profile</a> 
                 </li>
                 <li>
                     <a href="#" (click)="logout()">Logout</a>

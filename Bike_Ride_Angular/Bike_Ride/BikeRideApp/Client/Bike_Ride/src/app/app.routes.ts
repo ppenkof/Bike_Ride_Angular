@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BikeBoard } from './features/bikesCs/bike-board/bike-board';
 import { NotFound } from './shared/components';
+import { Profile } from './features/profile/profile';
 
 export const routes: Routes = [{
     path: '', 
@@ -30,6 +31,11 @@ export const routes: Routes = [{
 {
     path: 'profile', 
     loadComponent: () => import('./features/profile/profile').then(c => c.Profile) },
+{
+    path: 'profile/:id',
+    component: Profile
+    // loadComponent: () => import('./features/profile/profile').then(c => c.Profile)
+},
 {
     path: 'logout', 
     redirectTo: '/home', 

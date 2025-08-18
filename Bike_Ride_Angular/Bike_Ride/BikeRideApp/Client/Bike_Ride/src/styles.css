@@ -39,6 +39,12 @@ span {
 
 button {
     color: white;
+    background-color: #454b52;
+    /* background-color: #acaba9; */
+    border-radius: 2em;
+    margin: 1.3em;
+    padding: 0.3em 2em;
+    
 }
 
 button:hover {
@@ -228,7 +234,6 @@ main {
 
 button:hover {
     scale: 1.1;
-    /* background-color: rgba(22, 21, 21, 0.7); */
 }
 
 time {

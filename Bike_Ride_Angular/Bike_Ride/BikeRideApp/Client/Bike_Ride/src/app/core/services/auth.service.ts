@@ -13,7 +13,7 @@ export class AuthService {
   private _currentUser = signal<User | null>(null); // Adjust type as necessary
   private _token = signal<string | null>(null);
   private _isAdmin = signal<boolean>(false); // Assuming you might need this for admin checks
-  private _adminArr = ['admin@abv.bg', 'george@abv.bg', 'peter@abv.bg'];
+  private _adminArr = ['admin@abv.bg', 'george@abv.bg', 'peter@abv.bg', 'plamen@abv.bg'];
 
   public isLoggedIn = this._isLoggedIn.asReadonly();
   public currentUser = this._currentUser.asReadonly();
@@ -89,7 +89,7 @@ logout(): Observable<void> {
         localStorage.clear(); // Clear all local storage
     })
 );
-console.log(`Logout called, current user: ${repsponse}`); // Debugging log
+console.log(`Logout called, current user: ${JSON.stringify(repsponse)}`); // Debugging log
 
 return repsponse;
 }
@@ -98,21 +98,28 @@ return repsponse;
     return this._currentUser()?.id || null;
   }
 
+                                                                        
   update(user: User): Observable<User> {
-    return this.httpClient.put<ApiUser>(`${this.apiUrl}/${user.id}`, {
+  if (!user || !user.id) {
+      console.error('Invalid user object provided for update:', user);
+      throw new Error('User ID is required for update.');
+    }
+    const request = this.httpClient.put<User>(`${this.apiUrl}/${(user.id)}`, { //localStorage.getItem(user.id)
         _id: user.id,
         username: user.username,
         email: user.email,
-        tel: user.phone       
+        tel: user.phone
     }, {
         withCredentials: false //It is not necessary to send cookies with this request
-    }).pipe(
-        map(apiUser => this.mapApiUserToUser(apiUser)),
+    })
+  .pipe(
+        //map(apiUser => this.mapApiUserToUser(apiUser)),
         tap(user => {
             this._currentUser.set(user);
             localStorage.setItem('currentUser', JSON.stringify(user))
         })
     );
+    return request;
 }
 
 getToken(): string | null {
@@ -123,7 +130,15 @@ private isUserAdmin(email: string): boolean {
   return this._adminArr.includes(email);
 }
 
-private mapApiUserToUser(apiUser: ApiUser): User {
+private mapApiUserToUser(apiUser: ApiUser): User{
+  
+if (!apiUser || !apiUser._id) {
+  const user = localStorage.getItem('currentUser');
+  console.warn('Invalid apiUser:', apiUser._id); 
+  console.warn('Invalid apiUser:', apiUser);
+  throw new Error(`Cannot map user: _id is missing but check this locale ${JSON.stringify(user)}`); // Debugging log
+}
+
   return <User> {
       id: apiUser._id,
       username: apiUser.username,

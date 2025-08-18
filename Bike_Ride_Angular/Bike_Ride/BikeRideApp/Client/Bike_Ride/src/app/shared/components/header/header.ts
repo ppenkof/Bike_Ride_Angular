@@ -28,9 +28,9 @@ export class Header {
         console.log(`Logout successful ${this.isLoggedIn}`);
       },
       error: (err) => {
-        if(err.status === 401 || err.status === 404){
+        if(err.status >= 401 || err.status < 405){
             localStorage.removeItem('currentUser');
-            localStorage.removeItem('token'); 
+            localStorage.removeItem('token');
         }
         console.log('Logout failed', err);
         this.router.navigate(['/login']);
