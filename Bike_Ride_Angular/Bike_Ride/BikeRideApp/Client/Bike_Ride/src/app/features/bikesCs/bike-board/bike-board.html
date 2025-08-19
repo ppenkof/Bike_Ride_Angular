@@ -13,6 +13,9 @@
                     @for (bike of bikes$ | async; track bike.id) {
                     <app-bike-item [bike]="bike"></app-bike-item>
                     }
+                    @empty {
+                        <p>Loading elements...</p>
+                        }
                 </div>
             </main>
         </div>

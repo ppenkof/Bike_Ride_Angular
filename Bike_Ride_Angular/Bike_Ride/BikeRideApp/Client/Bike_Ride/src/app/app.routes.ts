@@ -26,6 +26,9 @@ export const routes: Routes = [{
     // loadComponent: () => import('./features/themes/theme-content/theme-content').then(c => c.ThemeContent)
 },
 {
+    path: 'mostPopular', 
+    loadComponent: () => import('./features/bikesCs/bike-most-popular/bike-most-popular').then(c => c.BikeMostPopular) },
+{
     path: 'add-bike', 
     loadComponent: () => import('./features/bikesCs/new-bike/new-bike').then(c => c.NewBike) },
 {

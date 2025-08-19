@@ -10,7 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-bike-board',
-  imports: [CommonModule, BikeItem, RouterLink],
+  imports: [CommonModule, BikeItem],
   templateUrl: './bike-board.html',
   styleUrl: './bike-board.css'
 })
@@ -29,8 +29,5 @@ constructor(
   this.bikeService.getBikes().subscribe(data => console.log('Bikes DATA emitted:', data));
   }
 
-  // ngOnInit(): void {
-  //   this.bikeService.getBikes().subscribe();
-  // }
 }
 

@@ -1,7 +1,7 @@
 .welcome {
     text-align: center;
     padding: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   
   .welcome h3 {
@@ -14,11 +14,11 @@
     font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 2rem;
-    color: #666;
+    color: inherit;
   }
   
   .container {
-    width: 80%;
+    width: 100%;
     margin:auto;
     padding-bottom: 4.5em;
     display: flex;

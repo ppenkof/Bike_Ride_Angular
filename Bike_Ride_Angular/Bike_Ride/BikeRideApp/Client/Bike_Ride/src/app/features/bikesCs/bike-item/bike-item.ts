@@ -8,7 +8,7 @@ import { SliceTitlePipe } from '../../../shared/pipes/slice-title.pipe';
 
 @Component({
   selector: 'app-bike-item',
-  imports: [CommonModule, RouterLink, SliceTitlePipe],
+  imports: [CommonModule],
   providers: [SliceTitlePipe],
   templateUrl: './bike-item.html',
   styleUrl: './bike-item.css',

@@ -117,7 +117,6 @@ export class Profile {
   
       this.isEditMode = false;
       this.profileForm.reset();
-      // this.router.navigate(['/profile', this.currentUser()?.id]);
       this.authService.logout().subscribe(()=> {console.log('Successfully logged out after profile update')});
     }
   }

@@ -1,0 +1,51 @@
+<!-- @if (isLoggedIn()) { -->
+    <div class="welcome">
+            <h3>Welcome!</h3>
+            <p>This MTB Website is a place, where you can book a test ride of a bike and like it. You can also see which bikes are the most liked.</p>
+        
+        <div class="container">
+            <main>
+                <div class="likedBikes-title">
+                    @for (like of liked$ | async; track like.id) {
+                    <!-- <app-bike-item [bike]="like"></app-bike-item> -->
+                    <div class="bike-title">   
+                        <!-- bike component  -->
+                        <div class="bike-container">
+                            <!-- <h1>Most Popular Bikes</h1> -->
+                            <div class="bike-name-wrapper">
+                                
+                                <div class="bike-name">
+                                    <a href="#" class="normal">
+                                        <div class="name-wrapper"> 
+                                            <h2>{{like.type}}</h2>
+                                        </div> 
+                                    </a>
+                                    <div class="columns">
+                                        <div>
+                                            <p>{{like.bikeName}}</p>
+                                            <div class="nick-name">
+                                                <p>Body:<span><img src="{{like.image}}" alt="sorce"></span></p>
+                                            </div>
+                                            <div>
+                                                <p>Decsription:</p> <p>{{like.description | sliceTitle}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="bike-likes">
+                                            <p>Likes: <span>{{like.likes}}</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    @empty {
+                        <p>Loading elements...</p>
+                        }
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- } -->
+    
+   

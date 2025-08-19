@@ -13,7 +13,7 @@ export class AuthService {
   private _currentUser = signal<User | null>(null); // Adjust type as necessary
   private _token = signal<string | null>(null);
   private _isAdmin = signal<boolean>(false); // Assuming you might need this for admin checks
-  private _adminArr = ['admin@abv.bg', 'george@abv.bg', 'peter@abv.bg', 'plamen@abv.bg'];
+  private _adminArr = ['admin@abv.bg', 'plamen@abv.bg'];
 
   public isLoggedIn = this._isLoggedIn.asReadonly();
   public currentUser = this._currentUser.asReadonly();
