@@ -1,0 +1,56 @@
+/* .welcome {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .welcome h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .welcome p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #666;
+  } */
+  
+  .container .missing{
+    width: 80%;
+    margin:auto;
+    padding-bottom: 4.5em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+.bike-buttons {
+    text-align: center;
+    flex-basis: 25%;
+    margin:1em;
+}
+
+.bike-buttons button {
+    padding: 0.2rem 0.5rem;
+    border: none;
+    border-radius: 0.8rem;
+    color: white;
+    cursor: pointer;
+    width: 12em;
+    background-color: rgba(73, 72, 72, 0.7);
+    margin:0.6em;
+}
+
+button:hover {
+    scale: 1.1;
+    /* background-color: rgba(22, 21, 21, 0.7); */
+}
+
+.missing{
+  padding-top: 5em;
+  margin-bottom: 7.5em !important;
+  color: #dad6d6;
+  font-size: 1.3rem;
+  font-weight: 600 !important;
+}

@@ -27,6 +27,9 @@ export const routes: Routes = [{
     loadComponent: () => import('./features/bikesCs/bike-content/bike-content').then(c => c.BikeContent)
 },
 {
+    path: 'my-rides', 
+    loadComponent: () => import('./features/book-ride/book-ride').then(c => c.BookRide) },
+{
     path: 'mostPopular', 
     loadComponent: () => import('./features/bikesCs/bike-most-popular/bike-most-popular').then(c => c.BikeMostPopular) },
 {
