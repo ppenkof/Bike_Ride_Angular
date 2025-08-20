@@ -54,16 +54,10 @@
                         <div class="bike-buttons">
                             <!-- <button class=""></button> -->
                              @if (isLoggedIn)  {
-                        @if (isSubscribed(bike.id)) {
-                            <button class="unsubscribe" (click)="toggleSubscribe(bike.id)">Test ride</button>
-                        } @else {
-
-                            <!-- <button class="info" (click)="toggleSubscribe(bike.id)" ></button> bikeId:{{bike.id}} -->
-                            <!-- /bike-content/{{bike.id}} -->
+                      
                             <button class="info" routerLink="/bike-content/:{{bike.id}}">More Activities</button>
-                            <button class="ride" routerLink="/bike-test-ride">Test Ride</button>
+                            <button class="ride" (click)="bookRide(bike.id)">Test Ride</button>
                         }
-                    }
                             <p>Likes: <span>{{bike.likes}}</span></p>
                             <p>Price: <span>{{bike.price}}$</span></p>
                         </div>

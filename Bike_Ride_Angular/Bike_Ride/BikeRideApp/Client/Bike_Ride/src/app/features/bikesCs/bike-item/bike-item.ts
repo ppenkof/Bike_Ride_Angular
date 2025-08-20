@@ -5,6 +5,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
 import { SliceTitlePipe } from '../../../shared/pipes/slice-title.pipe';
 import { BikeContent } from '../bike-content/bike-content';
+import { BikesService } from '../../../core/services/bikes.service'; // Import the BikesService
 
 
 @Component({
@@ -20,6 +21,7 @@ export class BikeItem {
 
   private authService = inject(AuthService);
   private sliceTitle = inject(SliceTitlePipe);
+  private bikeService = inject(BikesService); // Inject the BikesService
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -29,15 +31,15 @@ export class BikeItem {
     return this.authService.getCurrentUserId();
   }
 
-  isSubscribed(bikeId: string): boolean {
-    // For now, return false. In a real app, you'd check against user's subscriptions
-    return false;
-  }
-
-  toggleSubscribe(bikeId: string): void {
-    // For now, just log the action. In a real app, you'd make an API call
-    console.log(`Toggling subscription for bike: ${bikeId}`);
-    
+  bookRide( id:string): void {
+    this.bikeService.updateBike(id, { booked: true }).subscribe({
+      next: (updatedBike) => {
+        console.log('Bike booked successfully:', updatedBike);
+      },
+      error: (error) => {
+        console.error('Error booking bike:', error);
+      }
+    })
   }
 
   truncateDescription(isTruncate: boolean): string {
