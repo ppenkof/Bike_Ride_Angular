@@ -1,0 +1,32 @@
+.bike-buttons {
+    text-align: center;
+    flex-basis: 25%;
+    margin:1em;
+}
+
+.bike-buttons button {
+    padding: 0.2rem 0.5rem;
+    border: none;
+    border-radius: 0.8rem;
+    color: white;
+    cursor: pointer;
+    width: 12em;
+    background-color: rgba(73, 72, 72, 0.7);
+    margin:0.6em;
+}
+
+button:hover {
+    scale: 1.1;
+    /* background-color: rgba(22, 21, 21, 0.7); */
+}
+
+/* bike board */
+
+  .container {
+    width: 100%;
+    margin:auto;
+    padding-bottom: 4.5em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}

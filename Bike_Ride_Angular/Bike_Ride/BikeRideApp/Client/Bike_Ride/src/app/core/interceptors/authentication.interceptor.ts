@@ -9,7 +9,7 @@ export const AuthenticationInterceptor: HttpInterceptorFn = (req, next) => {
     
 if(token) {
     const authenticationRequest = req.clone({
-            headers: req.headers.set('X-Authorization', token).set('X-Admin', 'true')
+            headers: req.headers.set('X-Authorization', token)//.set('X-Admin', 'true')
         });
     return next(authenticationRequest);
 }

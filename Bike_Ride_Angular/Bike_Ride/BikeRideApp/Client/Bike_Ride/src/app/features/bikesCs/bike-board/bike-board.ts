@@ -6,11 +6,12 @@ import { BikesService } from '../../../core/services/bikes.service';
 import { BikeItem } from '../bike-item/bike-item';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { BikeContent } from '../bike-content/bike-content';
 
 
 @Component({
   selector: 'app-bike-board',
-  imports: [CommonModule, BikeItem],
+  imports: [CommonModule, BikeItem, RouterLink],
   templateUrl: './bike-board.html',
   styleUrl: './bike-board.css'
 })

@@ -1,1 +1,53 @@
-<p>bike-content works!</p>
+
+ <div class="container">
+    <main>
+        <div class="bike-title">
+            <div class="bike-container">
+                <div class="bike-title">   
+                    <!-- bike component  -->
+                    <div class="bike-container">
+                        <!-- <h1>Most Popular Bikes</h1> -->
+                        <div class="bike-name-wrapper">
+                            
+                            <div class="bike-name">
+                                <a href="#" class="normal">
+                                    <div class="name-wrapper"> 
+                                        <h2>{{bike.type}}</h2>
+                                    </div> 
+                                </a>
+                                <div class="columns">
+                                    <div>
+                                        <p>{{bike.bikeName}}</p>
+                                        <div class="nick-name">
+                                            <p>Body:<span><img src={{converImageUrl(bike.image)}} alt="sorce"></span></p>
+                                        </div>
+                                        <div>
+                                            <p>Decsription:</p> <p>{{bike.description}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="bike-buttons">
+                                        <!-- <button class=""></button> -->
+                                        @if (isLoggedIn)  {
+                                            @if (isAdmin) {
+                                                <button class="edit" (click)="onEdit(bike.id)">Edit</button>
+                                                <button class="delete" (click)="onDelete(bike.id)">Delete</button>
+                                                <button class="like" (click)="onLike(bike.id)">Like</button>
+                                            } @else {
+                                                <button class="like" (click)="onLike(bike.id)">Like</button>
+                                            }
+                                        <button class="cancel" routerLink="/bikes">Cancel</button>
+                                    
+                                }
+                                        <p>Likes: <span>{{bike.likes}}</span></p>
+                                        <p>Price: <span>{{bike.price}}$</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!-- </div> -->

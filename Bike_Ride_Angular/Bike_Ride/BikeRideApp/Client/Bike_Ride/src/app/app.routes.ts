@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { BikeBoard } from './features/bikesCs/bike-board/bike-board';
 import { NotFound } from './shared/components';
 import { Profile } from './features/profile/profile';
+import { BikeContent } from './features/bikesCs';
 
 export const routes: Routes = [{
     path: '', 
@@ -21,9 +22,9 @@ export const routes: Routes = [{
     path: 'bikes', 
     loadComponent: () => import('./features/bikesCs/bike-board/bike-board').then(c => c.BikeBoard) },
 {
-    path: 'bikes/:id',
-    component: BikeBoard
-    // loadComponent: () => import('./features/themes/theme-content/theme-content').then(c => c.ThemeContent)
+    path: 'bike-content/:id',
+    // component: BikeContent
+    loadComponent: () => import('./features/bikesCs/bike-content/bike-content').then(c => c.BikeContent)
 },
 {
     path: 'mostPopular', 
@@ -32,6 +33,9 @@ export const routes: Routes = [{
     path: 'add-bike', 
     loadComponent: () => import('./features/bikesCs/new-bike/new-bike').then(c => c.NewBike) },
 {
+    path: 'edit-bike/:id', 
+    loadComponent: () => import('./features/bikesCs/edit-bike/edit-bike').then(c => c.EditBike) },
+{
     path: 'profile', 
     loadComponent: () => import('./features/profile/profile').then(c => c.Profile) },
 {
@@ -39,6 +43,9 @@ export const routes: Routes = [{
     component: Profile
     // loadComponent: () => import('./features/profile/profile').then(c => c.Profile)
 },
+//{
+//     path: 'bike-test-ride', 
+//     loadComponent: () => import('./features/book-ride/book-ride').then(c => c.BookRide) },
 {
     path: 'logout', 
     redirectTo: '/home', 

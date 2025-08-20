@@ -16,10 +16,6 @@ export class Header {
   readonly currentUser = this.authService.currentUser;
   readonly isAdmin = this.authService.isAdmin;
 
-  // ngOnInit(): void {
-  //   console.log(`Header component initialized. User logged in: ${this.isLoggedIn()}, ${this.currentUser()}, isAdmin: ${this.isAdmin()}`);
-  // }
-
   logout(): void {
     console.log(`Logout check ${this.authService.isLoggedIn}`)
     this.authService.logout().subscribe({

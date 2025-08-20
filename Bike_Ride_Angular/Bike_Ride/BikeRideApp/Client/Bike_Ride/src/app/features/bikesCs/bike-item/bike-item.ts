@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
 import { SliceTitlePipe } from '../../../shared/pipes/slice-title.pipe';
+import { BikeContent } from '../bike-content/bike-content';
 
 
 @Component({
   selector: 'app-bike-item',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   providers: [SliceTitlePipe],
   templateUrl: './bike-item.html',
   styleUrl: './bike-item.css',
@@ -19,7 +20,6 @@ export class BikeItem {
 
   private authService = inject(AuthService);
   private sliceTitle = inject(SliceTitlePipe);
-  //converUrl=this.authService.converImageUrl;
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();

@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Footer, Header, ErrorNotification, NotFound} from './shared/components';
 import { Profile } from './features/profile/profile';
-import { BikeMostPopular } from './features/bikesCs';
+import { BikeContent, BikeMostPopular } from './features/bikesCs';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { BikeMostPopular } from './features/bikesCs';
   imports: [RouterOutlet, 
             Footer, 
             Header,
-            ErrorNotification,],
+            ErrorNotification],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

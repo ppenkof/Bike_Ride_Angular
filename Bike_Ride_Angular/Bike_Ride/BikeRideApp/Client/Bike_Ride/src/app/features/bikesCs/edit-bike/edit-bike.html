@@ -1,0 +1,62 @@
+<div class="new-bike-border">
+    <div class="header-background">
+        <span>Edit bike</span>
+    </div>
+    <form (ngSubmit)="onSubmit()">
+        <div class="new-bike-name">
+            <label for="bikeName">bike name <span class="red">*</span></label>
+            <input [class.input-error]="bikeNameError" type="text" name="bikeName" id="bikeName"
+                [(ngModel)]="bikeName" (blur)="validateName()">
+            @if (bikeNameError) {
+            <p class="error">
+                {{ bikeNameErrorMessage }}
+            </p>
+            }
+        </div>
+        <div class="new-bike-content">
+            <label for="descriptionText">description <span class="red">*</span></label>
+            <textarea [class.input-error]="descriptionError" type="text" name="descriptionText" id="descriptionText" rows="2"
+                class="height" [(ngModel)]="descriptionText" (blur)="validateDescription()"></textarea>
+            @if (descriptionError) {
+            <p class="error">
+                {{ descriptionErrorMessage }}
+            </p>
+            }
+        </div>
+        <div class="new-bike-type">
+            <label for="typeText">type <span class="red">*</span></label>
+            <textarea [class.input-error]="bikeTypeError" type="text" name="typeText" id="typeText" rows="1"
+                class="height" [(ngModel)]="bikeType" (blur)="validateType()"></textarea>
+            @if (bikeTypeError) {
+            <p class="error">
+                {{ bikeTypeErrorMessage }}
+            </p>
+            }
+        </div>
+        <div class="new-bike-price">
+            <label for="priceValue">price <span class="red">*</span></label>
+            <textarea [class.input-error]="tesPriceError" type="text" name="priceValue" id="priceValue" rows="1"
+                class="height" [(ngModel)]="testPrice" (blur)="validatePrice()"></textarea>
+            @if (tesPriceError) {
+            <p class="error">
+                {{ testPriceErrorMessage }}
+            </p>
+            }
+        </div>
+        <div class="new-bike-image">
+            <label for="imageUrl">imageUrl<span class="red">*</span></label>
+            <textarea [class.input-error]="imageError" type="text" name="imageUrl" id="imageUrl" rows="1"
+                class="height" [(ngModel)]="imageUrl" (blur)="validateImage()"></textarea>
+            @if (imageError) {
+            <p class="error">
+                {{ imageErrorMessage }}
+            </p>
+            }
+        </div>
+        <div class="new-bike-buttons">
+            <button type="button" class="cancel" (click)="onCancel()">Cancel</button>
+            <button type="submit" class="add-new" [disabled]="!isFormValid()">Edit</button>    
+        </div>
+    </form>
+</div>
+
