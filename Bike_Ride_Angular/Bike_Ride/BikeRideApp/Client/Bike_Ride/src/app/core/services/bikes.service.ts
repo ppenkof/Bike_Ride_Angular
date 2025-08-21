@@ -46,7 +46,7 @@ export class BikesService implements OnInit {
  private _getBikes(): Observable<Bike[]> {
   return this.httpClient.get<BikeRes>(`${this.apiUrl}/jsonstore/bikes`).pipe(
     map(response =>
-      Object.entries(response.products ?? {}).map(([uuid, bikeData]) => ({
+      Object.entries(response?.products ?? {}).map(([uuid, bikeData]) => ({
         id: uuid,
         bikeName: bikeData.name,
         price: bikeData.price,
@@ -63,44 +63,54 @@ export class BikesService implements OnInit {
 }
 
 private _createBikeCollection(): void {   
-// Step 1: Get existing bikes from target collection // Step 2: Get bikes from source collection
-  this.getBikes().subscribe({
-    next: (existingBikes) => {
-      const existingNames = new Set(existingBikes.map(b => b.bikeName));
-      
-      this._getBikes().subscribe({
-        next: (sourceBikes) => {
-          const bikesToMigrate = sourceBikes.filter(bike => !existingNames.has(bike.bikeName));
-
-          console.log(`Migrating ${bikesToMigrate.length} new bikes...`);
-
-          bikesToMigrate.forEach(bike => {
-            this.createBike(
-              bike.bikeName,
-              bike.price,
-              bike.type,
-              bike.description,
-              bike.image
-            ).subscribe({
-              next: (createdBike) => {
-                console.log('Bike created:', createdBike);
-              },
-              error: (err) => {
-                console.error('Error creating bike:', err);
-              }
-            });
-          });
-        },
-        error: (err) => {
-          console.error('Error fetching source bikes:', err);
+// Step 1: Get existing bikes from target collection 
+// Step 2: Get bikes from source collection
+    this.getBikes().pipe(
+      catchError(err => {
+        if (err.status === 404) {
+          console.warn('Main collection not found. Falling back to store...');
+          return of(null); // Treat as empty
         }
-      });
-    },
-    error: (err) => {
-      console.error('Error fetching existing bikes:', err);
-    }
-  });
-
+        console.error('Error fetching main collection:', err);
+        return throwError(() => err);
+      }),
+      switchMap(existingBikes => {
+        if (!existingBikes || existingBikes.length === 0) {
+          return this._getBikes().pipe(
+            switchMap(sourceBikes => {
+              const createRequests = sourceBikes.map(bike =>
+                this.createBike(
+                  bike.bikeName,
+                  bike.price,
+                  bike.type,
+                  bike.description,
+                  bike.image
+                ).pipe(
+                  catchError(err => {
+                    console.error('Error creating bike:', err);
+                    return of(null);
+                  })
+                )
+              );
+              return createRequests.length > 0 ? forkJoin(createRequests) : of([]);
+            })
+          );
+        } else {
+          console.log('Main collection already has bikes. Skipping migration.');
+          return of([]);
+        }
+      }),
+      tap(createdBikes => {
+        const successfulCreations = createdBikes.filter(b => b !== null);
+        if (successfulCreations.length > 0) {
+          console.log(`Successfully migrated ${successfulCreations.length} bikes.`);
+        }
+      }),
+      catchError(err => {
+        console.error('Migration failed:', err);
+        return of([]);
+      })
+    ).subscribe();
 
 }
 
@@ -159,18 +169,6 @@ createBike(name: string, price: number, type: string, description: string, image
 
 updateBike(id:string, payload:Partial<Bike>): Observable<Bike> { //name?: string, price?: number, type?: string, description?: string, image?: string, likes?: number
  
-  //const payload: Partial<Bike>
-  // Ensure the payload is sent as JSON
-
-  // if (name !== undefined) payload.bikeName = name;
-  // if (price !== undefined) payload.price = price;
-  // if (type !== undefined) payload.type = type;
-  // if (description !== undefined) payload.description = description;
-  // if (image !== undefined) payload.image = image;
-  // if (likes !== undefined) payload.likes = likes;
-  // payload{_ownerId: '60f0cf0b-34b0-4abd-9769-8c42f830dffc' 
-
-
   return this.httpClient.patch<Bike>(`${this.apiUrl}/data/bikes/${id}`, payload, { headers: { 'Content-Type': 'application/json' } } // Ensure the payload is sent as JSON
   ).pipe(
     tap((updatedBike) => {
