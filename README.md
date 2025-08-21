@@ -3,6 +3,7 @@
 BikeHub is a frontend Angular application that displays a catalog of bikes, allows users to like bikes, and supports user authentication. It integrates with a backend API (SoftUni Practice Server) and uses Angular 20 features like signals and interceptors.
 2. Features
 •	User authentication (login/logout)
+• Admin access with (admin@abv.bg/admin)
 •	User profile editing
 •	Display bikes with images and all items
 •	Like functionality (user-specific and total like count)
@@ -10,7 +11,7 @@ BikeHub is a frontend Angular application that displays a catalog of bikes, allo
 •	Review and edit book list
 •	Responsive UI
 •	Token-based API communication
-3. Project Structure
+4. Project Structure
 
 src/
 ├── app/
