@@ -5,6 +5,7 @@ import  { Bike } from '../../models/bike.model'; // Adjust the import path as ne
 import { BikeRes } from '../../models/bikeRes.model'; // Adjust the import path as necessary
 import { forkJoin, throwError, catchError, switchMap } from 'rxjs';
 import { AuthService } from './auth.service'; // Adjust the import path as necessary
+import { Like } from '../../models';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class BikesService implements OnInit {
   private authService = inject(AuthService); // Inject the AuthService
 
   public bikes$: Observable<Bike[]> = this.bikesBehaviorSubject.asObservable();
-  public likedBikes$: Observable<Bike[]> = this.bikesBehaviorSubject.asObservable();
+  // public likedBikes$: Observable<Bike[]> = this.bikesBehaviorSubject.asObservable();
 
   constructor(private httpClient: HttpClient) {
     // Initialize the bikes$ observable with the current value of the BehaviorSubject
@@ -53,7 +54,8 @@ export class BikesService implements OnInit {
         type: bikeData.type,
         description: bikeData.description,
         image: bikeData.image,
-        likes: bikeData.likes
+        likes: bikeData.likes,
+        booked: bikeData.booked
       }))
     ),
     tap(bikes => {//this.bikesBehaviorSubject.next(bikes);
@@ -84,7 +86,8 @@ private _createBikeCollection(): void {
                   bike.price,
                   bike.type,
                   bike.description,
-                  bike.image
+                  bike.image,
+                  bike.booked
                 ).pipe(
                   catchError(err => {
                     console.error('Error creating bike:', err);
@@ -126,6 +129,7 @@ private _createBikeCollection(): void {
         description: bike.description,
         image: bike.image,
         likes: bike.likes,
+        booked: bike.booked,
         _ownerId: bike._ownerId,
         _createdOn: bike._createdOn
       }))
@@ -147,14 +151,16 @@ getBikeById(id?: string): Observable<Bike> {
 }
 
 
-createBike(name: string, price: number, type: string, description: string, image: string): Observable<Bike> {
+createBike(name: string, price: number, type: string, description: string, image: string, booked: boolean): Observable<Bike> {
   const payload = {
     name,
     price,
     type,
     description,
     image,
-    likes: 0 // default value if likes is not provided
+    likes: 0, // default value if likes is not provided
+    booked: false
+
   };
 
   return this.httpClient.post<Bike>(`${this.apiUrl}/data/bikes`, payload, { headers: { 'Content-Type': 'application/json' } } // Ensure the payload is sent as JSON

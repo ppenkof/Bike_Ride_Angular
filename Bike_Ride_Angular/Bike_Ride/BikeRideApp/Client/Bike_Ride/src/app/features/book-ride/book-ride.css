@@ -1,23 +1,4 @@
-/* .welcome {
-    text-align: center;
-    padding: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .welcome h3 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  .welcome p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    color: #666;
-  } */
-  
-  .container .missing{
+.container .missing{
     width: 80%;
     margin:auto;
     padding-bottom: 4.5em;

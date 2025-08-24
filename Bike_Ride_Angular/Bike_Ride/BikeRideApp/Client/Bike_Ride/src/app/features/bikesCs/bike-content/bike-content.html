@@ -19,7 +19,8 @@
                                     <div>
                                         <p>{{bike.bikeName}}</p>
                                         <div class="nick-name">
-                                            <p>Body:<span><img src={{converImageUrl(bike.image)}} alt=""></span></p>
+                                            <!-- converImageUrl(bike.image) -->
+                                            <p>Body:<span><img src={{bike.image}} alt="img"></span></p>
                                         </div>
                                         <div>
                                             <p>Decsription:</p> <p>{{bike.description}}</p>
@@ -31,14 +32,16 @@
                                             @if (isAdmin) {
                                                 <button class="edit" (click)="onEdit(bike.id)">Edit</button>
                                                 <button class="delete" (click)="onDelete(bike.id)">Delete</button>
-                                                <button class="like" (click)="onLike(bike.id)">Like</button>
+                                                <!-- <button class="like" (click)="onLike(bike.id)">Like</button> -->
                                             } @else {
-                                                <button class="like" (click)="onLike(bike.id)">Like</button>
+                                                @if (!hasLiked) {
+                                                    <button class="like" (click)="onLike(bike.id)">Like</button>
+                                                }
                                             }
                                         <button class="cancel" routerLink="/bikes">Cancel</button>
                                     
                                 }
-                                        <p>Likes: <span>{{bike.likes}}</span></p>
+                                        <p>Likes: <span>{{getLikeCount(bike.id)}}</span></p>
                                         <p>Price: <span>{{bike.price}}$</span></p>
                                     </div>
                                 </div>

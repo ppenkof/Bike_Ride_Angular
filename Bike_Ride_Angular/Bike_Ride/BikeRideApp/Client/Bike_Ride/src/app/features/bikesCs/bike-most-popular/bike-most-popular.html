@@ -5,7 +5,7 @@
         <div class="container">
             <main>
                 <div class="likedBikes-title">
-                    @for (like of liked$ | async; track like.id) {
+                    @for (like of bikes$ | async; track like.id) {
                     <!-- <app-bike-item [bike]="like"></app-bike-item> -->
                     <div class="bike-title">   
                         <!-- bike component  -->
@@ -30,7 +30,8 @@
                                             </div>
                                         </div>
                                         <div class="bike-likes">
-                                            <p>Likes: <span>{{like.likes}}</span></p>
+                                            <p>Likes: <span>{{getLikeCount(like.id)}}</span></p>
+                                            <p>Price: <span>{{like.price}}$</span></p>
                                         </div>
                                     </div>
                                 </div>

@@ -2,7 +2,7 @@
     <main>
         @if(isAvailable){  
         <div class="bike-title">
-            @for (bike of bookedBikes$ | async; track bike.id) {
+            @for (bookedBike of bookedBikes$ | async; track bookedBike.id) {
                   
                     <div class="bike-container">
                         <div class="bike-title">   
@@ -13,21 +13,21 @@
                                     <div class="bike-name">
                                         <a href="#" class="normal">
                                             <div class="name-wrapper"> 
-                                                <h2>{{bike.type}}</h2>
+                                                <h2>type: {{bookedBike.type}}</h2>
                                             </div> 
                                         </a>
                                         <div class="columns">
                                             <div>
-                                                <p>{{bike.bikeName}}</p>
+                                                <p>Bike: {{bookedBike.bikeName}}</p>
                                                 <div class="nick-name">
-                                                    <p>Body:<span><img src={{converImageUrl(bike.image)}} alt="sorce"></span></p>
+                                                    <!-- <p>Body:<span><img src={{converImageUrl(bookedBike.image)}} alt="sorce"></span></p> -->
                                                 </div>
-                                                <!-- <div>
-                                                    <p>Decsription:</p> <p>{{bike.description}}</p>
-                                                </div> -->
+                                                <div>
+                                                    <p>Date: {{bookedBike._createdOn}}</p>
+                                                </div>
                                             </div>
                                             <div class="bike-buttons">
-                                                <button class="delete" (click)="onRemove(bike.id)">Delete</button>   
+                                                <button class="delete" (click)="onRemove(bookedBike.id)">Dissmiss</button>   
                                             </div>
                                         </div>
                                     </div>

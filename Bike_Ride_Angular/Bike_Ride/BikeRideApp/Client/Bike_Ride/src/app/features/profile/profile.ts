@@ -6,7 +6,7 @@ import { RouterLink, Router, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive],
+  imports: [ReactiveFormsModule],
   templateUrl: './profile.html',
   styleUrl: './profile.css'
 })

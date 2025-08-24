@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, signal } from '@angular/core';
 import { Bike } from '../../../models';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
@@ -12,17 +12,18 @@ import { ActivatedRoute } from '@angular/router';
 import { LikeService } from '../../../core/services/like.service';
 import { BehaviorSubject, of } from 'rxjs';
 import { Like } from '../../../models';
+import { BikeMostPopular } from '../bike-most-popular/bike-most-popular';
 
 
 @Component({
   selector: 'app-bike-content',
-  imports: [CommonModule, RouterLink, BikeItem, BikeBoard],
+  imports: [CommonModule, RouterLink],
   templateUrl: './bike-content.html',
   styleUrl: './bike-content.css',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BikeContent {
+export class BikeContent implements OnInit{
 
   @Input() bike!: Bike;
 
@@ -31,21 +32,20 @@ export class BikeContent {
   private routes = inject(Router);
   private route = inject(ActivatedRoute);
   private likeService = inject(LikeService);
+  private bikeId: string;
+  private userId: string |  null;
+  public  hasLiked: boolean = false;
 
   bikes$: Observable<Bike[]>;
-  // likeCount$: Observable<number> | undefined;
-  // userLike$: Observable<Like | null> = of(null);
-  
 
-
-  
   constructor() {
-    this.bikes$=this.bikeService.bikes$;
 
+    this.userId=this.authService.getCurrentUserId();
+    this.bikes$=this.bikeService.bikes$;
     let targetBikeId = this.route.snapshot.paramMap.getAll('id')[0]; // Get the bike ID from the route parameters
     targetBikeId = targetBikeId.replace(':',''); // Ensure the ID is a string 
-      console.error(`BikeContent: bike ID provided in route parameters: ${targetBikeId}`);
-      
+    this.bikeId = targetBikeId;
+    console.error(`BikeContent: bike ID provided in route parameters: ${targetBikeId}`);
     this.bikeService.bikes$.pipe(
       map(bikes => bikes.find(bike => bike.id === targetBikeId)),
       tap(bike => {
@@ -57,30 +57,22 @@ export class BikeContent {
         }
       })
     ).subscribe();
-
     
-// this.bikeService.bikes$.pipe(
-//   map(bikes => bikes.find(bike => bike.id === targetBikeId)),
-//   tap(bike => {
-//     if (bike) {
-//       this.bike = bike;
-//       console.log('Bike found in bikes$:', bike);
-
-//       // Fetch like count and user like
-//       const userId = this.authService.getCurrentUserId();
-//       this.likeCount$ = this.likeService.getCount(bike.id);
-//       if (userId) {
-//         this.userLike$ = this.likeService.getUserLike(bike.id, userId);
-//       }
-//     } else {
-//       console.warn('Bike not found in bikes$');
-//     }
-//   })
-// ).subscribe();
-
-
+    this.likeService.getCount(this.bikeId).subscribe();
+    this.likeService.getUserLike(this.bikeId,this.userId).subscribe(userLike => {this.hasLiked = !!userLike; console.log(`User has alredy liked this: ${this.hasLiked}`);
+    });
 }
 
+ngOnInit(): void {
+  this.likeService.getCount(this.bikeId).subscribe();
+  this.likeService.getUserLike(this.bikeId,this.userId).subscribe(userLike => {this.hasLiked = !!userLike; console.log(`User has alredy liked this: ${this.hasLiked}`);
+  });
+}
+
+  
+  getLikeCount(bikeId: string): number {
+    return this.likeService.likeCounts()[bikeId] || 0;
+  }
 
    get isLoggedIn(): boolean {
     console.log('BikeContent: Checking if user is logged in:', this.authService.isLoggedIn());
@@ -120,36 +112,20 @@ export class BikeContent {
     });                                                      
   }
 
-onLike(bikeId: string): void {
-  this.bikeService.updateBike(bikeId,{likes:1}).subscribe({
-    next: () => {
-      this.routes.navigate(['/bikes']); // Navigate to the bike board after deletion
-      console.log(`Bike with ID ${bikeId} liked successfully.`);
-    },
-    error: (err) => {
-      console.error('Error liking bike:', err);
+ 
+  onLike(bikeId: string): void {
+      if(!this.hasLiked){
+        this.likeService.like(bikeId).subscribe({
+          next: (like) => {
+            this.routes.navigate(['/bikes']);
+            console.log('BikeContent: Like successful:', like);
+          },
+          error: (err) => {
+            console.error('BikeContent: Error liking bike:', err);
+          }
+        });
+      }
     }
-  });
-  
-// const userId = this.authService.getCurrentUserId();
-// if (!userId) {
-//   console.warn('User must be logged in to like a bike.');
-//   return;
-// }
 
-// this.likeService.like(bikeId).subscribe({
-//   next: (newLike) => {
-//     console.log(`Bike ${bikeId} liked successfully by user ${userId}.`, newLike);
-
-//     // Refresh like count and user like status
-//     this.likeCount$ = this.likeService.getCount(bikeId);
-//     this.userLike$ = this.likeService.getUserLike(bikeId, userId);
-//   },
-//   error: (err) => {
-//     console.error('Error liking bike:', err);
-//   }
-// });
-
-}
 
 }

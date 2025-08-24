@@ -45,7 +45,8 @@
                         <div>
                             <p>{{bike.bikeName}}</p>
                             <div class="nick-name">
-                                <p>Body:<span><img src={{converImageUrl(bike.image)}} alt="sorce"></span></p>
+                                <!-- converImageUrl(bike.image) -->
+                                <p>Body:<span><img src={{converImageUrl(bike.image)}} alt="sorce"></span></p> 
                             </div>
                             <div>
                                 <p>Decsription:</p> <p>{{truncateDescription(true)}}</p>
@@ -56,9 +57,11 @@
                              @if (isLoggedIn)  {
                       
                             <button class="info" routerLink="/bike-content/:{{bike.id}}">More Activities</button>
-                            <button class="ride" (click)="bookRide(bike.id)">Test Ride</button>
+                            @if(!hasBooked){
+                                <button class="ride" (click)="bookRide(bike.id)">Test Ride</button>
+                            }
                         }
-                            <p>Likes: <span>{{bike.likes}}</span></p>
+                            <p>Likes: <span>{{getLikeCount(bike.id)}}</span></p>
                             <p>Price: <span>{{bike.price}}$</span></p>
                             <!-- <p>booked: <span>{{bike.booked}}</span></p> -->
                         </div>

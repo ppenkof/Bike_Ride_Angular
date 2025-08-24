@@ -115,7 +115,7 @@ export class NewBike {
     this.validateImage();
 
     if (this.isFormValid()) {
-      this.bikesService.createBike(this.bikeName, this.testPrice, this.bikeType, this.descriptionText, this.imageUrl)
+      this.bikesService.createBike(this.bikeName, this.testPrice, this.bikeType, this.descriptionText, this.imageUrl, false)
         .subscribe({
           next: () => {
             this.router.navigate(['/home'])//this.router.navigate(['/bikes'])

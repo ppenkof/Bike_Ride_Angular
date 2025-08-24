@@ -35,7 +35,7 @@ export class EditBike {
     this.bikes$=this.bikeService.bikes$;
     let targetBikeId = this.route.snapshot.paramMap.getAll('id')[0]; // Get the bike ID from the route parameters
     targetBikeId = targetBikeId.replace(':',''); // Ensure the ID is a string 
-    console.error(`BikeContent: bike ID provided in route parameters: ${targetBikeId}`);
+    console.log(`BikeContent: bike ID provided in route parameters: ${targetBikeId}`);
       
     this.bikeService.bikes$.pipe(
       map(bikes => bikes.find(bike => bike.id === targetBikeId)),
@@ -74,12 +74,6 @@ export class EditBike {
   imageUrl = this.bike?.image;
   imageError = false;
   imageErrorMessage = '';
-
-  // name,
-  // price,
-  // type,
-  // description,
-  // image: imageUrl,
 
   validateName(): void {
     if (!this.bikeName) {
@@ -144,8 +138,10 @@ export class EditBike {
   }
 
   isFormValid(): boolean {
-    return  Boolean(this.bikeName) &&!this.bikeNameError && !this.bikeNameErrorMessage && Boolean(this.descriptionText) && !this.descriptionError && !this.descriptionErrorMessage &&
-            Boolean(this.bikeType) && !this.bikeTypeError && !this.bikeTypeErrorMessage  && this.testPrice > 0 && !this.tesPriceError && !this.testPriceErrorMessage && 
+    return  Boolean(this.bikeName) &&!this.bikeNameError && !this.bikeNameErrorMessage && 
+            Boolean(this.descriptionText) && !this.descriptionError && !this.descriptionErrorMessage &&
+            Boolean(this.bikeType) && !this.bikeTypeError && !this.bikeTypeErrorMessage  && 
+                    this.testPrice > 0 && !this.tesPriceError && !this.testPriceErrorMessage && 
             Boolean(this.imageUrl) && !this.imageError && !this.imageErrorMessage; 
   }
 
@@ -161,14 +157,7 @@ export class EditBike {
     this.validateImage();
 
 
-    // this.profileForm.patchValue({
-    //   username: user?.username,
-    //   email: user?.email,
-    //   phone: user?.phone
-    // })
-    // this.isEditMode = true;
-
-    if (this.isFormValid()) {
+   if (this.isFormValid()) {
       this.bikesService.updateBike(this.bike.id, {bikeName: this.bikeName, price: this.testPrice, type: this.bikeType, description: this.descriptionText, image: this.imageUrl})
         .subscribe({
           next: () => {

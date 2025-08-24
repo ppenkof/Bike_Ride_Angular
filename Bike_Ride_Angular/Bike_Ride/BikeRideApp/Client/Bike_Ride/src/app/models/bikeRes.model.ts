@@ -10,6 +10,7 @@ export interface BikeRes {
        description: string;
        image: string;
        likes: number;
+       booked:boolean;
       };
    };
  }

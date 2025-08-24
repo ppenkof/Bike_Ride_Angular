@@ -1,5 +1,5 @@
 export interface Like {
     _id: string;
-    productId: string;
+    bikeId: string;
     ownerId: string; //_ownerId: string;
   }

@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
 import { Bike } from '../../../models';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SliceTitlePipe } from '../../../shared/pipes/slice-title.pipe';
-import { BikeContent } from '../bike-content/bike-content';
+import { ActivatedRoute } from '@angular/router';
 import { BikesService } from '../../../core/services/bikes.service'; // Import the BikesService
+import { LikeService } from '../../../core/services/like.service';
+import { BookService } from '../../../core/services/book.service';
 
 
 @Component({
@@ -16,12 +18,17 @@ import { BikesService } from '../../../core/services/bikes.service'; // Import t
   styleUrl: './bike-item.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BikeItem {
+export class BikeItem implements OnInit{
   @Input() bike!: Bike;
 
   private authService = inject(AuthService);
   private sliceTitle = inject(SliceTitlePipe);
   private bikeService = inject(BikesService); // Inject the BikesService
+  private likeService = inject(LikeService);
+  private bookService = inject(BookService);
+  private router = inject(Router);
+
+  public  hasBooked: boolean = false;
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -31,15 +38,29 @@ export class BikeItem {
     return this.authService.getCurrentUserId();
   }
 
+  ngOnInit(): void {
+    this.likeService.getCount(this.bike.id).subscribe(); 
+    this.bookService.getCount(this.bike.id).subscribe();
+    this.bookService.getUserBooks(this.currentUserId, this.bike.id).subscribe(userBook => {this.hasBooked = !!userBook; console.log(`User has alredy liked this: ${this.hasBooked}`);
+    });
+  }
+  
   bookRide( id:string): void {
-    this.bikeService.updateBike(id, { booked: true }).subscribe({
-      next: (updatedBike) => {
-        console.log('Bike booked successfully:', updatedBike);
-      },
-      error: (error) => {
-        console.error('Error booking bike:', error);
-      }
-    })
+    // if(!this.hasBooked){
+      this.bookService.book(id).subscribe({
+        next: (book) => {
+          this.router.navigate(['/bikes']);
+          console.log('BikeItem: Book successful:', book);
+        },
+        error: (err) => {
+          console.error('BikeItem: Error booking bike:', err);
+        }
+      });
+    //}
+  }
+    
+  getLikeCount(bikeId: string): number {
+    return this.likeService.likeCounts()[bikeId] || 0;
   }
 
   truncateDescription(isTruncate: boolean): string {
