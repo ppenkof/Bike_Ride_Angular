@@ -57,7 +57,7 @@
                              @if (isLoggedIn)  {
                       
                             <button class="info" routerLink="/bike-content/:{{bike.id}}">More Activities</button>
-                            @if(!hasBooked){
+                            @if(!hasBooked || getIsAdmin()){
                                 <button class="ride" (click)="bookRide(bike.id)">Test Ride</button>
                             }
                         }

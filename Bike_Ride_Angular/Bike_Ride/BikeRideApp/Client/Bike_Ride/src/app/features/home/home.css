@@ -2,9 +2,7 @@
 
     text-align: center;
     padding: 2rem;
-
     min-height: 76vh;
-    /* position:; */
     align-content: center;
 
 }
@@ -12,9 +10,8 @@
 .welcome h3 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    /* color: #666; */
     color: #fafafa;
-    /* color: rgb(95, 187, 76); */
+    text-shadow:  -1px -1px 0 #000;
     font-weight: 400;
 }
 
@@ -23,7 +20,7 @@
     line-height: 1.6;
     margin-bottom: 2rem;
     color: #fafafa;
-    /* color: rgb(62, 143, 42); */
+    text-shadow: -1px -1px 0 #000;
     font-weight: 400;
     
 }

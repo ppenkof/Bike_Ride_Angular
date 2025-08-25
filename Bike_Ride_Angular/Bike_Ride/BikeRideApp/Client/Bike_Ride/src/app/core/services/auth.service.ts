@@ -47,6 +47,7 @@ login(email: string, password: string): Observable<User> {
         this._isLoggedIn.set(true);
         localStorage.setItem('currentUser', JSON.stringify(user));
         this._isAdmin.set(this.isUserAdmin(user.email)); // Check if the user is an admin
+        console.log(`This is admin: ${this._isAdmin}`);
       })
     ); 
 }

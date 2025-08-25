@@ -85,7 +85,7 @@ export class BookRide implements OnInit{
         console.log('Current user ID:', this.userId);
       }),
       map(([bikes = [], bookings]) => {
-        let userBookings = bookings.filter(book => {book._ownerId !== this.userId;console.log(`Book _ownerId is: ${book._ownerId} and userId is: ${this.userId} and userBookings!!!`);
+        let userBookings = bookings.filter(book => {book._ownerId === this.userId;console.log(`Book _ownerId is: ${book._ownerId} and userId is: ${this.userId} and userBookings!!!`);
         });
         const bookedBikeIds = userBookings.map(book => book.bikeId);console.log(`userBookings is: `,JSON.stringify(userBookings));
         const bookedBikes = bikes.filter(bike => bookedBikeIds.includes(bike.id));

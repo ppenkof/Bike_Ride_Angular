@@ -30,15 +30,8 @@ export class BikeItem implements OnInit{
 
   public  hasBooked: boolean = false;
 
-  get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
-
-  get currentUserId(): string | null {
-    return this.authService.getCurrentUserId();
-  }
-
   ngOnInit(): void {
+    this.authService.isAdmin;
     this.likeService.getCount(this.bike.id).subscribe(); 
     this.bookService.getCount(this.bike.id).subscribe();
     this.bookService.getUserBooks(this.currentUserId, this.bike.id).subscribe(userBook => {this.hasBooked = !!userBook; console.log(`User has alredy liked this: ${this.hasBooked}`);
@@ -59,8 +52,21 @@ export class BikeItem implements OnInit{
     //}
   }
     
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  get currentUserId(): string | null {
+    return this.authService.getCurrentUserId();
+  }
+
   getLikeCount(bikeId: string): number {
     return this.likeService.likeCounts()[bikeId] || 0;
+  }
+
+  getIsAdmin(){
+    console.log(`This user is admin or ${this.authService.isAdmin}`);
+    return this.authService.isAdmin;
   }
 
   truncateDescription(isTruncate: boolean): string {
