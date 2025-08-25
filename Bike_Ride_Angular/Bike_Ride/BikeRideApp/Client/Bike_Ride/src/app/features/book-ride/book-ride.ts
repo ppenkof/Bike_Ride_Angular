@@ -147,9 +147,13 @@ export class BookRide implements OnInit{
   //*************************************** */
 
     
-  formatDate(timestamp: string): string {
-    return new Date(Number(timestamp)).toLocaleDateString();
+  
+  formatDate(timestamp?: Date | string): string {
+    if (!timestamp) return 'N/A';
+    const date = typeof timestamp === 'string' ? new Date(Number(timestamp)) : timestamp;
+    return date.toLocaleDateString();
   }
+
 
 
   converImageUrl(imageUrl:string): string | null {
